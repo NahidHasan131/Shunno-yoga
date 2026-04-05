@@ -8,7 +8,7 @@ import Video from './pages/Video'
 import Contact from './pages/Contact'
 import AppLayout from './appLayout/AppLayout'
 import Trainer from './pages/Trainer'
-import Classes from './pages/Classes'
+import Media from './pages/Media'
 
 function App() {
   const router = createBrowserRouter([
@@ -27,7 +27,7 @@ function App() {
         {
           path: '/media',
           children: [
-            { path: '/media', element: <Classes/> },
+            { path: '/media', element: <Media/> },
             { path: '/media/audio', element: <Audio /> },
             { path: '/media/video', element: <Video /> },
           ]

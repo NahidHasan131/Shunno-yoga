@@ -32,7 +32,7 @@ const Footer = () => {
                     <ul className="flex flex-col gap-2 text-sm text-gray-300">
                     <li><NavLink to="/" className="hover:text-white transition-colors">Home</NavLink></li>
                     <li><NavLink to="/about" className="hover:text-white transition-colors">About Us</NavLink></li>
-                    <li><NavLink to="/classes" className="hover:text-white transition-colors">Media</NavLink></li>
+                    <li><NavLink to="/media" className="hover:text-white transition-colors">Media</NavLink></li>
                     <li><NavLink to="/contact" className="hover:text-white transition-colors">Contact Us</NavLink></li>
                     </ul>
                 </div>
@@ -41,10 +41,10 @@ const Footer = () => {
                 <div className="flex flex-col gap-4">
                     <h4 className="text-white font-semibold text-base">Services</h4>
                     <ul className="flex flex-col gap-2 text-sm text-gray-300">
-                    <li><NavLink to="/classes/audio" className="hover:text-white transition-colors">Private Yoga Sessions</NavLink></li>
-                    <li><NavLink to="/classes/video" className="hover:text-white transition-colors">Group Yoga Classes</NavLink></li>
-                    <li><NavLink to="/classes" className="hover:text-white transition-colors">Meditation Workshops</NavLink></li>
-                    <li><NavLink to="/classes" className="hover:text-white transition-colors">Corporate Wellness</NavLink></li>
+                    <li><NavLink to="/media/audio" className="hover:text-white transition-colors">Private Yoga Sessions</NavLink></li>
+                    <li><NavLink to="/media/video" className="hover:text-white transition-colors">Group Yoga Classes</NavLink></li>
+                    <li><NavLink to="/media" className="hover:text-white transition-colors">Meditation Workshops</NavLink></li>
+                    <li><NavLink to="/media" className="hover:text-white transition-colors">Corporate Wellness</NavLink></li>
                     </ul>
                 </div>
 

@@ -8,7 +8,7 @@ import { FaClock } from 'react-icons/fa';
 
 const Hero = () => {
   return (
-    <section className="max-w-340 mx-auto px-4 lg:px-8 py-12 lg:py-20">
+    <section className="max-w-340 mx-auto px-6 lg:px-12 py-12 lg:py-20">
       <div className="flex flex-col lg:flex-row items-center gap-10">
 
         {/* Left content */}
@@ -56,7 +56,7 @@ const Hero = () => {
           <img src={heroBig} alt="yoga class" className="w-full max-w-151 rounded-2xl object-cover h-107.5 ml-auto" />
 
           {/* Card overlay - bottom left */}
-          <div className="absolute bottom-16 left-0 lg:-left-22 bg-white border-[#E1EDE4] border-4 rounded-2xl shadow-xl overflow-hidden ">
+          <div className="absolute bottom-16 left-0 lg:-left-26 bg-white border-[#E1EDE4] border-4 rounded-2xl shadow-xl overflow-hidden ">
             <img src={heroSmall} alt="yoga beginners" className="w-78 h-47 object-cover" />
             <div className="px-6 py-3">
               <p className="text-xl font-semibold text-[#11141B] py-3">Yoga For Beginners</p>

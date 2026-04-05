@@ -2,13 +2,13 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { IoTimeOutline } from 'react-icons/io5';
 import { PiStackLight } from 'react-icons/pi';
-import heroBig from '../../assets/hero-big.jpg';
-import heroMedium from '../../assets/hero-medium.jpg';
-import heroSmall from '../../assets/hero-small.jpg';
+import morningYoga from '../../assets/morningYoga.jpg';
+import meditation from '../../assets/meditation.jpg';
+import powerYoga from '../../assets/powerYoga.jpg';
 
 const classes = [
   {
-    img: heroBig,
+    img: morningYoga,
     level: 'Beginner',
     duration: '30 minutes',
     title: 'Morning Yoga Flow',
@@ -17,7 +17,7 @@ const classes = [
     path: '/media',
   },
   {
-    img: heroMedium,
+    img: meditation,
     level: 'Intermediate',
     duration: '20 minutes',
     title: 'Meditation Stress Relief',
@@ -26,7 +26,7 @@ const classes = [
     path: '/media/video',
   },
   {
-    img: heroSmall,
+    img: powerYoga,
     level: 'Advanced',
     duration: '45 minutes',
     title: 'Power Yoga for Strength',
@@ -42,7 +42,7 @@ const FeaturedClasses = () => {
       style={{
         background: 'linear-gradient(135deg, #2d4a3e 0%, #3d6b55 40%, #4a7a62 70%, #2a4a3a 100%)',
       }}>
-      <div className="max-w-340 mx-auto px-4 lg:px-8">
+      <div className="max-w-340 mx-auto px-6 lg:px-12">
 
         {/* Header */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
@@ -87,9 +87,9 @@ const FeaturedClasses = () => {
 
                 {/* Members */}
                 <div className="flex items-center gap-2">
-                  <div className="flex -space-x-2">
-                    <img src={heroSmall} alt="m" className="w-9 h-9 rounded-full object-cover border-2 border-white" />
-                    <img src={heroBig} alt="m" className="w-9 h-9 rounded-full object-cover border-2 border-white" />
+                  <div className="flex -space-x-3">
+                    <img src={morningYoga} alt="m" className="w-9 h-9 rounded-full object-cover border-2 border-white" />
+                    <img src={meditation} alt="m" className="w-9 h-9 rounded-full object-cover border-2 border-white" />
                   </div>
                   <span className="text-[#62826B]/70">{cls.members}</span>
                 </div>
