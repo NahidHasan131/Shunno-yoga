@@ -4,6 +4,7 @@ import { BiAward } from 'react-icons/bi';
 import { MdGroups } from 'react-icons/md';
 import WhyChoose from '../../assets/why-choose-us.jpg';
 import WhyChooseSmall from '../../assets/why-choose-small.jpg';
+import Newsletter from '../Newsletter/Newsletter';
 
 const features = [
   {
@@ -25,7 +26,7 @@ const features = [
 
 const WhyChooseUs = () => {
   return (
-    <section className="py-16 lg:py-24 bg-[#F0F7F2]">
+    <section className="py-16 lg:py-24 pb-32 bg-[#F0F7F2] overflow-visible">
       <div className="max-w-340 mx-auto px-6 lg:px-12">
         <div className="flex flex-col md:flex-row gap-20 items-center">
 
@@ -84,6 +85,7 @@ const WhyChooseUs = () => {
           </div>
         </div>
       </div>
+      <Newsletter />
     </section>
   );
 };

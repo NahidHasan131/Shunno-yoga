@@ -4,6 +4,7 @@ import FeaturedClasses from '../components/FeaturedClasses/FeaturedClasses';
 import AboutUs from '../components/AboutUs/AboutUs';
 import WhyChooseUs from '../components/WhyChooseUs/WhyChooseUs';
 import Trainers from '../components/Trainers/Trainers';
+import Events from '../components/Events/Events';
 
 const Home = () => {
     return (
@@ -13,6 +14,7 @@ const Home = () => {
             <AboutUs />
             <WhyChooseUs />
             <Trainers />
+            <Events />
         </div>
     );
 };
