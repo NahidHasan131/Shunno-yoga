@@ -58,11 +58,7 @@ const AboutUs = () => {
 
           {/* About image */}
           <div className='md:w-5/12'>
-              <img
-              src={aboutImg}
-              alt="About Shunno Yoga"
-              className="w-full h-72 md:h-full object-cover rounded-2xl"
-              />
+              <img src={aboutImg} alt="About Shunno Yoga" className="w-full h-72 md:h-full object-cover rounded-2xl" />
           </div>
 
           {/* Feature cards */}
@@ -97,8 +93,7 @@ const AboutUs = () => {
               0: { slidesPerView: 2, spaceBetween: 20 },
               640: { slidesPerView: 3, spaceBetween: 30 },
               1024: { slidesPerView: 5, spaceBetween: 40 },
-            }}
-          >
+            }}>
             {logos.map((logo, i) => (
               <SwiperSlide key={i}>
                 <div className="flex items-center justify-center py-3">

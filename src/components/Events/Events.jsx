@@ -39,7 +39,7 @@ const Events = () => {
             </h2>
           </div>
           <NavLink
-            to="/contact" className="self-start md:self-end px-8 py-3 rounded-full font-medium bg-[#62826B] text-[#FFEFC5] hover:bg-[#11141B]  hover:scale-105 transition-all duration-300">
+            to="/contact" className="self-start md:self-end px-8 py-3 rounded-full font-medium bg-[#62826B] text-[#FFEFC5] hover:bg-[#11141B]  hover:scale-110 transition-all duration-300">
             All Events
           </NavLink>
         </div>

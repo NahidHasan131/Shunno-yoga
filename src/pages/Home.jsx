@@ -5,6 +5,9 @@ import AboutUs from '../components/AboutUs/AboutUs';
 import WhyChooseUs from '../components/WhyChooseUs/WhyChooseUs';
 import Trainers from '../components/Trainers/Trainers';
 import Events from '../components/Events/Events';
+import Testimonials from '../components/Testimonials/Testimonials';
+import CallToAction from '../components/CallToAction/CallToAction';
+import BlogSection from '../components/Blog/Blog';
 
 const Home = () => {
     return (
@@ -15,6 +18,9 @@ const Home = () => {
             <WhyChooseUs />
             <Trainers />
             <Events />
+            <Testimonials />
+            <CallToAction />
+            <BlogSection />
         </div>
     );
 };

@@ -29,10 +29,7 @@ const Hero = () => {
           </p>
 
           {/* CTA */}
-          <NavLink
-            to="/classes"
-            className="self-start px-8 py-3 rounded-full font-medium text-[#FFEFC5] bg-[#62826B] hover:bg-[#11141B] hover:scale-110 transition-all duration-300"
-          >
+          <NavLink to="/classes" className="self-start px-8 py-3 rounded-full font-medium text-[#FFEFC5] bg-[#62826B] hover:bg-[#11141B] hover:scale-110 transition-all duration-300" >
             Let's Get Started
           </NavLink>
 
