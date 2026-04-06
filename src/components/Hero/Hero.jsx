@@ -65,7 +65,7 @@ const Hero = () => {
             {s.badge}
           </span>
 
-          <h1 className="text-5xl lg:text-7xl font-medium text-[#11141B] leading-tight">
+          <h1 className="text-4xl lg:text-6xl font-medium text-[#11141B] leading-tight">
             {s.title}
           </h1>
 
