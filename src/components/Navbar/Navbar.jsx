@@ -113,9 +113,9 @@ const Navbar = () => {
 
           {/* CTA buttons */}
           <div className="hidden md:flex items-center gap-3">
-            <NavLink to="/contact"
+            <NavLink to="/auth/signup"
               className="px-5 py-2 rounded-full font-medium border border-[#62826B] text-[#62826B] hover:bg-[#62826B] hover:scale-110 hover:text-[#FFEFC5] transition-all duration-300 ease-in-out transform-gpu">
-              Join Class
+              Sign Up
             </NavLink>
             <button className="w-9 h-9 rounded-full flex items-center justify-center bg-[#62826B] text-white hover:scale-110 transition-all duration-300" aria-label="Call us">
               <FaPhoneAlt size={14} />

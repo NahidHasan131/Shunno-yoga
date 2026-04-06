@@ -10,6 +10,9 @@ import AppLayout from './appLayout/AppLayout'
 import Trainer from './pages/Trainer'
 import Media from './pages/Media'
 
+import Login from './pages/Login'
+import Signup from './pages/Signup'
+
 function App() {
   const router = createBrowserRouter([
     {
@@ -35,7 +38,14 @@ function App() {
         { path: '/blog', element: <Blog /> },
         { path: '/contact', element: <Contact /> },
       ]
-    }
+    },
+    {
+      path: '/auth',
+      children: [
+        { path: '/auth/signin', element: <Login /> },
+        { path: '/auth/signup', element: <Signup /> },
+      ]
+    },
   ])
 
   return (
