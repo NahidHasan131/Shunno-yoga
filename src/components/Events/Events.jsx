@@ -34,7 +34,7 @@ const Events = () => {
             <span className="self-start px-4 py-1.5 rounded-full border border-gray-300 text-gray-800 bg-white">
               Our Events
             </span>
-            <h2 className="text-4xl lg:text-5xl font-medium text-[#11141B] leading-tight">
+            <h2 className="text-4xl lg:text-5xl font-bold text-[#11141B] leading-tight">
               Upcoming Events & <br /> Workshops
             </h2>
           </div>
@@ -51,7 +51,7 @@ const Events = () => {
 
               {/* Left content */}
               <div className="space-y-4">
-                <span className=" text-[#11141B] bg-[#62826B]/10 px-5 py-2 rounded-full mb-7 inline-block">{e.date}</span>
+                <span className="text-sm text-gray-500 bg-[#62826B]/10 px-5 py-2 rounded-full mb-7 inline-block">{e.date}</span>
                 <h3 className="text-2xl font-semibold text-[#11141B]">{e.title}</h3>
                 <div className="flex items-center gap-1 text-[#62826B]/50">
                   <MdLocationOn size={20} className="text-[#62826B]" />

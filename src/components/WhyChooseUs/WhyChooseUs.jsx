@@ -48,7 +48,7 @@ const WhyChooseUs = () => {
                 className="md:w-93 w-full h-57 object-cover rounded-2xl"
               />
               <div className="w-full bg-white rounded-2xl flex flex-col justify-center items-center p-8 gap-4">
-                <span className="md:text-5xl text-4xl font-medium text-[#11141B]">10 K+</span>
+                <span className="md:text-5xl text-4xl font-bold text-[#11141B]">10 K+</span>
                 <span className=" text-gray-500 leading-snug">Meditation <br /> Hours Logged</span>
               </div>
             </div>
@@ -62,7 +62,7 @@ const WhyChooseUs = () => {
               <span className="self-start px-4 py-1.5 rounded-full border border-gray-300 text-gray-800 bg-white">
                 Why Choose Us
               </span>
-              <h2 className="text-4xl lg:text-5xl font-medium text-[#11141B] leading-tight mb-4">
+              <h2 className="text-4xl lg:text-5xl font-bold text-[#11141B] leading-tight mb-4">
                 The Shunno Yoga: Your Path to Inner Peace
               </h2>
             </div>

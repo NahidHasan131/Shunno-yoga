@@ -50,7 +50,7 @@ const FeaturedClasses = () => {
             <span className="self-start px-5 py-2 rounded-full bg-white/20 text-white backdrop-blur-sm">
               Featured Classes
             </span>
-            <h2 className="text-3xl lg:text-5xl font-semibold text-white leading-tight max-w-xl">
+            <h2 className="text-3xl lg:text-5xl font-bold text-white leading-tight max-w-xl">
               Explore Our Top Yoga & <br /> Meditation Classes
             </h2>
           </div>
@@ -95,7 +95,7 @@ const FeaturedClasses = () => {
                 </div>
 
                 {/* Description */}
-                <p className="font-semibold text-[#62826B]/70 leading-relaxed flex-1">{cls.desc}</p>
+                <p className="font-normal text-gray-500 leading-relaxed flex-1">{cls.desc}</p>
 
                 {/* Button */}
                 <NavLink to={cls.path} className="mt-2 w-9/10 mx-auto text-center py-2.5 rounded-full border border-gray-200 font-medium text-[#62826B]/80 hover:bg-[#11141B] hover:text-[#FFEFC5] hover:scale-110 transition-all duration-300">

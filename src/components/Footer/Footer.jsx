@@ -14,7 +14,7 @@ const Footer = () => {
             <NavLink to="/" className="flex items-center gap-2 text-4xl font-bold text-white">
               <span>🌿</span> Shunno Yoga
             </NavLink>
-            <p className="font-semibold leading-relaxed text-gray-300">
+            <p className="font-normal leading-relaxed text-gray-300">
               Turpis ornare euismod quam odio sit. Egestas molestie eget tellus sed. Aenean enim mattis imperdiet semper erat quam. Tempor blandit elementum urna.
             </p>
             <div className="flex items-center gap-2 text-gray-300 hover:text-gray-200 duration-300 transition-colors">

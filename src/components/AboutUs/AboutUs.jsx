@@ -67,16 +67,16 @@ const AboutUs = () => {
                 <div className="w-13 h-13 rounded-full bg-white flex items-center justify-center shadow-sm">
                   <span className='bg-[#62826B] p-1 text-white rounded-full'><BiAward size={20} className="text-white" /></span>
                 </div>
-                <h3 className="text-2xl font-medium text-[#11141B]">Certified Instructors</h3>
-                <p className="font-medium text-gray-500/70 leading-relaxed">Id massa id tortor interdum consectetur eu ultrices viverra. Est aliquet pellentesque potenti.</p>
+                <h3 className="text-2xl font-semibold text-[#11141B]">Certified Instructors</h3>
+                <p className="text-gray-500 leading-relaxed">Id massa id tortor interdum consectetur eu ultrices viverra. Est aliquet pellentesque potenti.</p>
               </div>
 
               <div className="flex flex-col gap-4 p-8 rounded-2xl bg-white hover:bg-[#F0F7F2] transition-all duration-200 border-2 border-[#F0F7F2]  ">
                 <div className="w-13 h-13 rounded-full bg-white flex items-center justify-center shadow-sm">
                   <span className='bg-[#62826B] p-1 text-white rounded-full'><GiMeditation size={20} className="text-white" /></span>
                 </div>
-                <h3 className="text-2xl font-medium text-[#11141B]">Holistic Approach</h3>
-                <p className="font-medium text-gray-500/70 leading-relaxed">Id massa id tortor interdum consectetur eu ultrices viverra. Est aliquet pellentesque potenti.</p>
+                <h3 className="text-2xl font-semibold text-[#11141B]">Holistic Approach</h3>
+                <p className="text-gray-500 leading-relaxed">Id massa id tortor interdum consectetur eu ultrices viverra. Est aliquet pellentesque potenti.</p>
               </div>
           </div>
         </div>

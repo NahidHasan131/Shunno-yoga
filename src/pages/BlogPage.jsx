@@ -4,6 +4,7 @@ import { MdArrowForward } from 'react-icons/md';
 import { IoTimeOutline } from 'react-icons/io5';
 import { FaUser } from 'react-icons/fa';
 import Breadcrumb from '../components/Breadcrumb/Breadcrumb';
+import BlogCard from '../components/Blog/BlogCard';
 import blog1 from '../assets/blog-img-1.jpg';
 import blog2 from '../assets/blog-img-2.jpg';
 import blog3 from '../assets/blog-img-3.jpg';
@@ -149,7 +150,7 @@ const Blog = () => {
                 <button
                   key={cat.name}
                   onClick={() => setActiveCategory(cat.name)}
-                  className="px-4 py-2 rounded-full text-sm font-medium border transition-all duration-300"
+                  className="px-4 py-2 rounded-full text-sm font-medium border transition-all duration-300 cursor-pointer"
                   style={{
                     backgroundColor: activeCategory === cat.name ? '#62826B' : 'white',
                     color: activeCategory === cat.name ? '#FFEFC5' : '#11141B',
@@ -163,29 +164,7 @@ const Blog = () => {
 
             {/* Grid */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              {filtered.map(p => (
-                <div key={p.id} className="flex flex-col gap-4 bg-white border border-gray-100 rounded-2xl overflow-hidden hover:shadow-md transition-shadow duration-300">
-                  <NavLink to="/blog" className="block overflow-hidden">
-                    <img src={p.img} alt={p.title} className="w-full h-52 object-cover hover:scale-105 transition-transform duration-500" />
-                  </NavLink>
-                  <div className="flex flex-col gap-3 p-5">
-                    <div className="flex items-center justify-between">
-                      <span className="px-3 py-1 rounded-full bg-[#62826B]/10 text-xs font-medium text-[#62826B]">{p.tag}</span>
-                      <span className="text-xs text-gray-400">{p.date}</span>
-                    </div>
-                    <NavLink to="/blog">
-                      <h3 className="text-lg font-bold text-[#11141B] hover:text-[#62826B] transition-colors duration-300 leading-snug">
-                        {p.title}
-                      </h3>
-                    </NavLink>
-                    <p className="text-sm text-gray-400 leading-relaxed line-clamp-2">{p.desc}</p>
-                    <div className="flex items-center justify-between pt-2 border-t border-gray-100 text-xs text-gray-400">
-                      <span className="flex items-center gap-1"><FaUser size={10} /> {p.author}</span>
-                      <span className="flex items-center gap-1"><IoTimeOutline size={12} /> {p.readTime}</span>
-                    </div>
-                  </div>
-                </div>
-              ))}
+              {filtered.map(p => <BlogCard key={p.id} post={p} />)}
             </div>
           </div>
 
@@ -215,7 +194,7 @@ const Blog = () => {
                   <li key={cat.name}>
                     <button
                       onClick={() => setActiveCategory(cat.name)}
-                      className="w-full flex items-center justify-between px-4 py-3 rounded-xl text-sm transition-all duration-200"
+                      className="w-full flex items-center justify-between px-4 py-3 rounded-xl text-sm transition-all duration-200 cursor-pointer"
                       style={{
                         backgroundColor: activeCategory === cat.name ? '#62826B' : '#F0F7F2',
                         color: activeCategory === cat.name ? '#FFEFC5' : '#11141B',

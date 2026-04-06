@@ -41,7 +41,7 @@ const Trainers = () => {
           <span className="px-4 py-1.5 rounded-full border border-gray-300 text-gray-800">
             Our Trainer
           </span>
-          <h2 className="text-4xl lg:text-5xl font-medium text-[#11141B] text-center">
+          <h2 className="text-4xl lg:text-5xl font-bold text-[#11141B] text-center">
             Meet Our Expert Trainers
           </h2>
         </div>
@@ -65,7 +65,7 @@ const Trainers = () => {
 
               {/* Info */}
               <div className="flex flex-col gap-2 px-8">
-                <h3 className="md:text-3xl text-2xl font-semibold text-[#11141B]">{t.name}</h3>
+                <h3 className="text-2xl font-semibold text-[#11141B]">{t.name}</h3>
                 <p className="text-gray-700 py-4 border-b font-medium border-gray-200">
                   Experience: <span className="font-semibold text-[#62826B]">{t.experience}</span>
                 </p>

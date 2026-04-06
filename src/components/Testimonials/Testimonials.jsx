@@ -59,7 +59,7 @@ const Testimonials = () => {
               <span className="self-start px-4 py-1.5 rounded-full border border-gray-300 text-gray-800">
                 Testimonials
               </span>
-              <h2 className="text-4xl lg:text-5xl font-medium text-[#11141B] leading-tight">
+              <h2 className="text-4xl lg:text-5xl font-bold text-[#11141B] leading-tight">
                 Real Stories from Our <br /> Members
               </h2>
             </div>
