@@ -1,9 +1,10 @@
 import React from 'react';
+import Breadcrumb from '../components/Breadcrumb/Breadcrumb';
 
 const Video = () => {
     return (
         <div>
-            Video
+            <Breadcrumb />
         </div>
     );
 };

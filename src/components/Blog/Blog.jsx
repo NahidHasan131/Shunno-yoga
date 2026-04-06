@@ -54,24 +54,26 @@ const Blog = () => {
         {/* Cards */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {posts.map((p) => (
-            <NavLink to={p.path} key={p.title} className="flex flex-col gap-4 group bg-gray-50 border border-[#62826B]/15 rounded-2xl">
+            <div key={p.title} className="flex flex-col gap-4 group bg-gray-50 border border-[#62826B]/15 rounded-2xl overflow-hidden">
               {/* Image with tag */}
-              <div className="relative rounded-2xl overflow-hidden">
+              <NavLink to={p.path} className="relative rounded-2xl overflow-hidden block">
                 <img src={p.img} alt={p.title} className="w-full h-72 object-cover group-hover:scale-105 transition-transform duration-500"/>
                 <span className="absolute bottom-0 left-0 px-4 py-3 rounded-[0px_15px_0px_15px] bg-[#FFEFC5]/30 text-xs font-medium text-[#11141B] backdrop-blur-xl">
                   {p.tag}
                 </span>
-              </div>
+              </NavLink>
 
               {/* Content */}
               <div className="flex flex-col gap-4 p-6">
                 <span className="text-gray-400">{p.date}</span>
-                <h3 className="text-2xl font-semibold text-[#11141B] group-hover:text-[#62826B] transition-colors duration-300">
-                  {p.title}
-                </h3>
+                <NavLink to={p.path}>
+                  <h3 className="text-2xl font-semibold text-[#11141B] hover:text-[#62826B] transition-colors duration-300">
+                    {p.title}
+                  </h3>
+                </NavLink>
                 <p className="text-sm text-gray-400 leading-relaxed">{p.desc}</p>
               </div>
-            </NavLink>
+            </div>
           ))}
         </div>
 

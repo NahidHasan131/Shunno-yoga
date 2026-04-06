@@ -1,11 +1,12 @@
 import React from 'react';
+import Breadcrumb from '../components/Breadcrumb/Breadcrumb';
 
-const Classes = () => {
+const Media = () => {
     return (
         <div>
-            Media
+            <Breadcrumb />
         </div>
     );
 };
 
-export default Classes;
+export default Media;
