@@ -77,12 +77,12 @@ const Navbar = () => {
   return (
     <>
       {/* Announcement bar */}
-      <div className="text-center text-xs md:text-sm py-3 px-4 bg-[#62826B] text-[#FFEFC5]">
+      {/* <div className="text-center text-xs md:text-sm py-3 px-4 bg-[#62826B] text-[#FFEFC5]">
         Try a Free Class Today <span className="text-white">- No commitment, Just Relaxation and Rejuvenation →</span>
-      </div>
+      </div> */}
 
       {/* Main navbar */}
-      <nav className="bg-white shadow-sm sticky top-0 z-50">
+      <nav className="bg-white sticky top-0 z-50">
         <div className="max-w-340 mx-auto flex items-center justify-between px-4 lg:px-8 py-5">
 
           {/* Logo */}

@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { NavLink } from 'react-router-dom';
 import { BsCameraVideoFill } from 'react-icons/bs';
 import { FaClock } from 'react-icons/fa';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay } from 'swiper/modules';
+import { MdArrowBackIos, MdArrowForwardIos } from 'react-icons/md';
 import 'swiper/css';
 import heroBig from '../../assets/hero-big.jpg';
 import heroMedium from '../../assets/hero-medium.jpg';
@@ -53,65 +54,89 @@ const slides = [
 
 const Hero = () => {
   const [activeIndex, setActiveIndex] = useState(0);
+  const swiperRef = useRef(null);
   const s = slides[activeIndex];
+
+  const handlePrev = () => swiperRef.current?.slidePrev();
+  const handleNext = () => swiperRef.current?.slideNext();
 
   return (
     <section className="max-w-340 mx-auto px-6 lg:px-12 py-12 lg:py-20 overflow-hidden">
       <div className="flex flex-col lg:flex-row items-center gap-10">
 
         {/* Left content */}
-        <div key={activeIndex} className="flex-1 flex flex-col gap-6 animate-fade-in">
-          <span className="self-start text-sm px-4 py-1.5 rounded-full border border-gray-300 text-gray-800">
-            {s.badge}
-          </span>
+        <div className="flex-1 flex flex-col gap-6">
+          <div key={activeIndex} className="flex flex-col gap-6 animate-fade-in">
+            <span className="self-start text-sm px-4 py-1.5 rounded-full border border-gray-300 text-gray-800">
+              {s.badge}
+            </span>
 
-          <h1 className="text-4xl lg:text-6xl font-medium text-[#11141B] leading-tight">
-            {s.title}
-          </h1>
+            <h1 className="text-4xl lg:text-6xl font-medium text-[#11141B] leading-tight">
+              {s.title}
+            </h1>
 
-          <p className="text-[#62826B]/60 font-medium leading-relaxed max-w-md">
-            {s.desc}
-          </p>
+            <p className="text-gray-500 font-medium leading-relaxed max-w-md">
+              {s.desc}
+            </p>
 
-          <NavLink
-            to={s.ctaPath}
-            className="self-start px-8 py-3 rounded-full font-medium text-[#FFEFC5] bg-[#62826B] hover:bg-[#11141B] hover:scale-110 transition-all duration-300"
-          >
-            Let's Get Started
-          </NavLink>
+            <NavLink
+              to={s.ctaPath}
+              className="self-start px-8 py-3 rounded-full font-medium text-[#FFEFC5] bg-[#62826B] hover:bg-[#11141B] hover:scale-110 transition-all duration-300"
+            >
+              Let's Get Started
+            </NavLink>
 
-          <div className="flex items-center gap-3 mt-12">
-            <div className="flex -space-x-4">
-              <img src={heroSmall} alt="member" className="w-13 h-13 rounded-full object-cover border-2 border-white" />
-              <img src={heroBig} alt="member" className="w-13 h-13 rounded-full object-cover border-2 border-white" />
-              <span className="text-xs font-semibold bg-gray-100 w-13 h-13 rounded-full text-gray-600 flex items-center justify-center">81K+</span>
+            <div className="flex items-center gap-3 mt-12">
+              <div className="flex -space-x-4">
+                <img src={heroSmall} alt="member" className="w-13 h-13 rounded-full object-cover border-2 border-white" />
+                <img src={heroBig} alt="member" className="w-13 h-13 rounded-full object-cover border-2 border-white" />
+                <span className="text-xs font-semibold bg-gray-100 w-13 h-13 rounded-full text-gray-600 flex items-center justify-center">81K+</span>
+              </div>
+              <span className="text-md text-[#11141B]">Worldwide Members</span>
             </div>
-            <span className="text-md text-[#11141B]">Worldwide Members</span>
+          </div>
+
+          {/* Arrows — outside key div, always visible */}
+          <div className="flex items-center gap-3 mt-12">
+            <button
+              onClick={handlePrev}
+              className="w-10 h-10 rounded-full border border-gray-300 flex items-center justify-center hover:bg-[#62826B] hover:border-[#62826B] hover:text-white transition-all duration-300"
+            >
+              <MdArrowBackIos size={16} />
+            </button>
+            <button
+              onClick={handleNext}
+              className="w-10 h-10 rounded-full border border-gray-300 flex items-center justify-center hover:bg-[#62826B] hover:border-[#62826B] hover:text-white transition-all duration-300"
+            >
+              <MdArrowForwardIos size={16} />
+            </button>
+            <span className="text-sm text-gray-400">{activeIndex + 1} / {slides.length}</span>
           </div>
         </div>
 
-        {/* Right — Swiper only slides images */}
-        <div className="flex-1 overflow-hidden">
+        {/* Right — Swiper only slides images, hidden on mobile */}
+        <div className="flex-1 overflow-hidden hidden lg:block">
           <Swiper
             modules={[Autoplay]}
             autoplay={{ delay: 4000, disableOnInteraction: false }}
             loop={true}
             speed={700}
+            onSwiper={(swiper) => (swiperRef.current = swiper)}
             onSlideChange={(swiper) => setActiveIndex(swiper.realIndex)}
           >
             {slides.map((slide, i) => (
               <SwiperSlide key={i}>
-                <div className="relative flex flex-col items-end gap-8">
+                <div className="relative flex flex-col items-end gap-6">
                   {/* Big image */}
                   <img
                     src={slide.bigImg}
                     alt="yoga class"
-                    className="w-full max-w-151 rounded-2xl object-cover h-107.5 ml-auto"
+                    className="w-full max-w-151 rounded-2xl object-cover h-102 ml-auto"
                   />
 
                   {/* Card overlay */}
-                  <div className="absolute bottom-26 left-10  bg-white border-[#E1EDE4] border-4 rounded-2xl shadow-xl overflow-hidden">
-                    <img src={slide.cardImg} alt={slide.cardTitle} className="w-78 h-47 object-cover" />
+                  <div className="absolute bottom-25 left-10  bg-white border-[#E1EDE4] border-4 rounded-2xl shadow-xl overflow-hidden">
+                    <img src={slide.cardImg} alt={slide.cardTitle} className="w-76 h-45 object-cover" />
                     <div className="px-6 py-3">
                       <p className="text-xl font-semibold text-[#11141B] py-3">{slide.cardTitle}</p>
                       <div className="flex items-center gap-5 mt-1.5 mb-4 font-semibold text-[#62826B]/70">
