@@ -19,10 +19,15 @@ const Login = () => {
     <div className="min-h-screen flex items-center justify-center bg-[#F0F7F2] px-4">
       <div className="w-full max-w-md">
 
-        {/* Logo */}
-        <NavLink to="/" className="flex items-center justify-center gap-2 text-2xl font-bold text-[#62826B] mb-8">
-          <span className="text-3xl">🌿</span> Shunno Yoga
-        </NavLink>
+        {/* Logo + Back button row */}
+        <div className="flex items-center justify-between mb-8">
+          <NavLink to="/" className="flex items-center gap-2 text-2xl font-bold text-[#62826B]">
+            <span className="text-3xl">🌿</span> Shunno Yoga
+          </NavLink>
+          <NavLink to="/" className="text-sm text-[#62826B] font-medium hover:opacity-70 transition-opacity">
+            ← Back to Home
+          </NavLink>
+        </div>
 
         <div className="bg-white rounded-3xl p-8 shadow-sm">
           <div className="flex flex-col gap-1 mb-8">

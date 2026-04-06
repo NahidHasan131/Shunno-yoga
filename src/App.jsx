@@ -12,6 +12,7 @@ import Media from './pages/Media'
 
 import Login from './pages/Login'
 import Signup from './pages/Signup'
+import NotFound from './pages/NotFound'
 
 function App() {
   const router = createBrowserRouter([
@@ -46,6 +47,7 @@ function App() {
         { path: '/auth/signup', element: <Signup /> },
       ]
     },
+    { path: '*', element: <NotFound /> },
   ])
 
   return (
