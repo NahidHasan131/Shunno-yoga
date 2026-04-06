@@ -25,7 +25,7 @@ const Footer = () => {
             </div>
           </div>
 
-          <div className='md:w-8/12 w-11/12 grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-0'>
+          <div className='md:w-8/12 w-11/12 grid grid-cols-2 md:grid-cols-3 gap-8 md:gap-0 mt-5 md:mt-0'>
                 {/* Links */}
                 <div className="flex flex-col md:gap-4 gap-2">
                     <h4 className="text-white font-semibold text-lg">Links</h4>
@@ -49,7 +49,7 @@ const Footer = () => {
                 </div>
 
                 {/* Working Hours */}
-                <div className="flex flex-col gap-4">
+                <div className="flex flex-col gap-4 pt-4 md:pt-0">
                     <h4 className="text-white font-semibold text-base">Working Hours</h4>
                     <p className="text-sm text-gray-300 leading-relaxed">
                     Scelerisque justo et sed in purus ornare pulvinar aliquam.
