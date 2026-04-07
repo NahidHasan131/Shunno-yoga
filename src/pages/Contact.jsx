@@ -3,6 +3,7 @@ import Breadcrumb from '../components/Breadcrumb/Breadcrumb';
 import { MdOutlineEmail, MdLocationOn, MdPhone } from 'react-icons/md';
 import { IoTimeOutline } from 'react-icons/io5';
 import { MdKeyboardArrowDown } from 'react-icons/md';
+import Events from '../components/Events/Events';
 
 const contactInfo = [
   {
@@ -161,6 +162,8 @@ const Contact = () => {
         </div>
       </div>
 
+      <Events />
+      
       {/* Map + FAQ side by side */}
       <div className="bg-[#F0F7F2] py-16 lg:py-24">
         <div className="max-w-340 mx-auto px-6 lg:px-12">
