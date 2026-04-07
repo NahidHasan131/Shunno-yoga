@@ -13,6 +13,15 @@ import Gallery from './pages/Gallery'
 import Signup from './pages/Signup'
 import NotFound from './pages/NotFound'
 import Login from './pages/Login'
+import AdminLayout from './components/admin/AdminLayout'
+import Dashboard from './pages/admin/Dashboard'
+import BlogManager from './pages/admin/BlogManager'
+import VideoManager from './pages/admin/VideoManager'
+import AudioManager from './pages/admin/AudioManager'
+import GalleryManager from './pages/admin/GalleryManager'
+import TrainerManager from './pages/admin/TrainerManager'
+import EventManager from './pages/admin/EventManager'
+import Settings from './pages/admin/Settings'
 
 function App() {
   const router = createBrowserRouter([
@@ -49,6 +58,20 @@ function App() {
       ]
     },
     { path: '*', element: <NotFound /> },
+    {
+      path: '/admin',
+      element: <AdminLayout />,
+      children: [
+        { path: '/admin',           element: <Dashboard /> },
+        { path: '/admin/blog',      element: <BlogManager /> },
+        { path: '/admin/videos',    element: <VideoManager /> },
+        { path: '/admin/audio',     element: <AudioManager /> },
+        { path: '/admin/gallery',   element: <GalleryManager /> },
+        { path: '/admin/trainers',  element: <TrainerManager /> },
+        { path: '/admin/events',    element: <EventManager /> },
+        { path: '/admin/settings',  element: <Settings /> },
+      ]
+    },
   ])
 
   return (
