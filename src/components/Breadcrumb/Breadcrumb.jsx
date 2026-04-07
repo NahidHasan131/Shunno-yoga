@@ -8,6 +8,7 @@ const pageMeta = {
   '/media':         { title: 'Media',         desc: 'Explore our audio and video yoga sessions for all levels.' },
   '/media/audio':   { title: 'Audio Classes', desc: 'Listen and practice with our guided audio yoga sessions.' },
   '/media/video':   { title: 'Video Classes', desc: 'Watch and follow along with our expert video classes.' },
+  '/media/gallery': { title: 'Gallery',      desc: 'Browse our collection of yoga class and event photos.' },
   '/blog':          { title: 'Blog post',   desc: 'Stay inspired with yoga tips, wellness guides and the latest news from Shunno Yoga.' },
   '/contact':       { title: 'Contact Us',    desc: 'Get in touch with us for classes, queries or partnerships.' },
 };

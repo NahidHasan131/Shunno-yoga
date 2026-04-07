@@ -9,10 +9,10 @@ import Contact from './pages/Contact'
 import AppLayout from './appLayout/AppLayout'
 import Trainer from './pages/Trainer'
 import Media from './pages/Media'
-
-import Login from './pages/Login'
+import Gallery from './pages/Gallery'
 import Signup from './pages/Signup'
 import NotFound from './pages/NotFound'
+import Login from './pages/Login'
 
 function App() {
   const router = createBrowserRouter([
@@ -34,6 +34,7 @@ function App() {
             { path: '/media', element: <Media/> },
             { path: '/media/audio', element: <Audio /> },
             { path: '/media/video', element: <Video /> },
+            { path: '/media/gallery', element: <Gallery /> },
           ]
         },
         { path: '/blog', element: <Blog /> },
@@ -43,7 +44,7 @@ function App() {
     {
       path: '/auth',
       children: [
-        { path: '/auth/signin', element: <Login /> },
+        { path: '/auth/signin', element: <Login/> },
         { path: '/auth/signup', element: <Signup /> },
       ]
     },

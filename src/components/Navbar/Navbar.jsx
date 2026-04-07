@@ -20,6 +20,7 @@ const navLinks = [
       { label: 'All Media', path: '/media' },
       { label: 'Audio', path: '/media/audio' },
       { label: 'Video', path: '/media/video' },
+      { label: 'Gallery', path: '/media/gallery' },
     ]
   },
   { label: 'Blog', path: '/blog' },

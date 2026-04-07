@@ -25,7 +25,7 @@ const Signup = () => {
           <NavLink to="/" className="flex items-center gap-2 text-2xl font-bold text-[#62826B]">
             <span className="text-3xl">🌿</span> Shunno Yoga
           </NavLink>
-          <NavLink to="/" className="text-sm text-[#62826B] font-medium hover:opacity-70 transition-opacity mr-1">
+          <NavLink to="/" className="text-sm text-[#62826B] font-medium hover:opacity-70 transition-opacity mr-3">
             ← Back to Home
           </NavLink>
         </div>
