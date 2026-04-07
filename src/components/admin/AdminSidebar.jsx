@@ -32,19 +32,19 @@ const AdminSidebar = ({ open, onToggle }) => {
 
       <aside className={`
         fixed lg:static inset-y-0 left-0 z-30
-        h-screen bg-[#11141B] flex flex-col shrink-0
+        h-screen bg-white border-r border-gray-200 flex flex-col shrink-0
         transition-all duration-300 ease-in-out
         ${open ? 'w-60 translate-x-0' : '-translate-x-full lg:translate-x-0 lg:w-16'}
       `}>
         {/* Logo + toggle */}
-        <div className="flex items-center border-b border-white/10 h-16 px-4 justify-between">
-          <span className={`text-white font-bold text-base whitespace-nowrap transition-all duration-300 overflow-hidden ${open ? 'opacity-100 max-w-xs' : 'opacity-0 max-w-0'}`}>
+        <div className="flex items-center border-b border-gray-200 h-16 px-4 justify-between">
+          <span className={`text-[#11141B] font-bold text-base whitespace-nowrap transition-all duration-300 overflow-hidden ${open ? 'opacity-100 max-w-xs' : 'opacity-0 max-w-0'}`}>
             🌿 Shunno Admin
           </span>
           {/* Desktop toggle */}
           <button
             onClick={onToggle}
-            className="text-gray-400 hover:text-white transition-colors shrink-0 hidden lg:block"
+            className="text-gray-400 hover:text-[#62826B] transition-colors shrink-0 hidden lg:block"
             title={open ? 'Collapse sidebar' : 'Expand sidebar'}
           >
             {open
@@ -55,7 +55,7 @@ const AdminSidebar = ({ open, onToggle }) => {
           {/* Mobile close */}
           <button
             onClick={onToggle}
-            className="text-gray-400 hover:text-white transition-colors shrink-0 lg:hidden"
+            className="text-gray-400 hover:text-[#62826B] transition-colors shrink-0 lg:hidden"
           >
             <IoClose size={22} />
           </button>
@@ -73,8 +73,8 @@ const AdminSidebar = ({ open, onToggle }) => {
               className={({ isActive }) =>
                 `flex items-center h-11 px-4 text-sm font-medium transition-colors duration-200 gap-3 ${
                   isActive
-                    ? 'bg-[#62826B] text-[#FFEFC5]'
-                    : 'text-gray-400 hover:bg-white/5 hover:text-white'
+                    ? 'bg-[#62826B]/10 text-[#62826B] border-r-2 border-[#62826B]'
+                    : 'text-gray-700 hover:bg-gray-50 hover:text-[#11141B]'
                 }`
               }
             >
@@ -87,11 +87,11 @@ const AdminSidebar = ({ open, onToggle }) => {
         </nav>
 
         {/* Back to site */}
-        <div className="border-t border-white/10 py-3">
+        <div className="border-t border-gray-200 py-3">
           <NavLink
             to="/"
             title={!open ? 'Back to Site' : undefined}
-            className="flex items-center h-11 px-4 gap-3 text-gray-500 hover:text-gray-300 transition-colors"
+            className="flex items-center h-11 px-4 gap-3 text-gray-600 hover:text-[#62826B] transition-colors"
           >
             <HiHome size={20} className="shrink-0" />
             <span className={`text-sm whitespace-nowrap transition-all duration-300 overflow-hidden ${open ? 'opacity-100 max-w-xs' : 'opacity-0 max-w-0'}`}>
