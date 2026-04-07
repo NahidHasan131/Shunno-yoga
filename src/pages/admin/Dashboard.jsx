@@ -1,7 +1,7 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import {
-  MdArticle, MdVideoLibrary, MdAudiotrack,
+  MdDashboard, MdArticle, MdVideoLibrary, MdAudiotrack,
   MdPhotoLibrary, MdPeople, MdEvent, MdArrowForward
 } from 'react-icons/md';
 
@@ -33,13 +33,15 @@ const recentActivity = [
 
 const Dashboard = () => {
   return (
-    <div className="flex flex-col gap-8 max-w-6xl">
+    <div className="flex flex-col gap-8 w-full">
 
       {/* Page title */}
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-bold text-[#11141B]">Dashboard</h1>
-          <p className="text-sm text-gray-400 mt-0.5">Manage your Shunno Yoga content</p>
+          <h1 className="text-3xl font-bold text-[#11141B] flex items-center gap-2">
+            <MdDashboard size={30} className="text-[#62826B]" /> Dashboard
+          </h1>
+          <p className="text-sm text-gray-400 mt-0.5">Here's what's happening with your content today.</p>
         </div>
         <span className="text-xs text-gray-400 bg-gray-100 px-3 py-1.5 rounded-full">
           Last updated: just now
@@ -72,7 +74,7 @@ const Dashboard = () => {
 
         {/* Quick actions */}
         <div className="lg:col-span-2 bg-white rounded-2xl border border-gray-100 p-6 flex flex-col gap-4">
-          <h2 className="font-semibold text-[#11141B] text-sm uppercase tracking-wide text-gray-400">Quick Actions</h2>
+          <h2 className="font-semibold text-sm uppercase tracking-wide text-gray-400">Quick Actions</h2>
           <div className="flex flex-col gap-2">
             {quickActions.map(a => (
               <NavLink
