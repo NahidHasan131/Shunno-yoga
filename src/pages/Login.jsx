@@ -1,30 +1,50 @@
 import React, { useState } from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
+import { useForm } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
+import * as yup from 'yup';
 import { MdOutlineEmail } from 'react-icons/md';
 import { RiLockPasswordLine } from 'react-icons/ri';
 import { FiEye, FiEyeOff } from 'react-icons/fi';
+import { useLoginMutation } from '../store/authApi';
+import { useDispatch } from 'react-redux';
+import { setCredentials } from '../store/authSlice';
+import AuthInput from '../components/auth/AuthInput';
+
+const schema = yup.object({
+  email:    yup.string().required('Email is required').email('Enter a valid email'),
+  password: yup.string().required('Password is required').min(8, 'Min 8 characters'),
+});
 
 const Login = () => {
-  const [form, setForm] = useState({ email: '', password: '' });
   const [showPass, setShowPass] = useState(false);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const [login, { isLoading, error: apiError }] = useLoginMutation();
 
-  const handleChange = (e) => setForm({ ...form, [e.target.name]: e.target.value });
+  const { register, handleSubmit, formState: { errors } } = useForm({
+    resolver: yupResolver(schema),
+  });
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // handle login logic here
+  const onSubmit = async (data) => {
+    try {
+      const res = await login(data).unwrap();
+      dispatch(setCredentials(res.data));
+      navigate('/admin');
+    } catch (err) {
+      console.error(err);
+    }
   };
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-[#F0F7F2] px-4">
       <div className="w-full max-w-md">
 
-        {/* Logo + Back button row */}
         <div className="flex items-center justify-between mb-8">
           <NavLink to="/" className="flex items-center gap-2 text-2xl font-bold text-[#62826B]">
             <span className="text-3xl">🌿</span> Shunno Yoga
           </NavLink>
-          <NavLink to="/" className="text-sm text-[#62826B] font-medium hover:opacity-70 transition-opacity mr-3">
+          <NavLink to="/" className="text-sm text-[#62826B] font-medium hover:opacity-70 transition-opacity mr-2">
             ← Back to Home
           </NavLink>
         </div>
@@ -35,53 +55,42 @@ const Login = () => {
             <p className="text-sm text-gray-500">Sign in to continue your wellness journey</p>
           </div>
 
-          <form onSubmit={handleSubmit} className="flex flex-col gap-5">
+          <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4">
 
-            {/* Email */}
-            <div className="flex flex-col gap-1.5">
-              <label className="text-sm font-medium text-[#11141B]">Email</label>
-              <div className="flex items-center gap-3 px-4 py-3 rounded-xl border border-gray-200 bg-white focus-within:border-[#62826B] transition-colors">
-                <MdOutlineEmail size={18} className="text-gray-400 shrink-0" />
-                <input
-                  type="email" name="email" value={form.email} onChange={handleChange} required
-                  placeholder="your@email.com"
-                  className="flex-1 text-sm outline-none bg-transparent"
-                />
-              </div>
-            </div>
+            {apiError && (
+              <p className="text-xs text-red-500 bg-red-50 px-4 py-2 rounded-xl">
+                {apiError?.data?.message || 'Login failed. Please check your credentials.'}
+              </p>
+            )}
 
-            {/* Password */}
+            <AuthInput label="Email" icon={<MdOutlineEmail size={18} />} error={errors.email?.message}>
+              <input {...register('email')} type="email" placeholder="your@email.com"
+                className="flex-1 text-sm outline-none bg-transparent" />
+            </AuthInput>
+
             <div className="flex flex-col gap-1.5">
               <div className="flex items-center justify-between">
                 <label className="text-sm font-medium text-[#11141B]">Password</label>
                 <NavLink to="#" className="text-xs text-[#62826B] hover:underline">Forgot password?</NavLink>
               </div>
-              <div className="flex items-center gap-3 px-4 py-3 rounded-xl border border-gray-200 bg-white focus-within:border-[#62826B] transition-colors">
-                <RiLockPasswordLine size={18} className="text-gray-400 shrink-0" />
-                <input
-                  type={showPass ? 'text' : 'password'} name="password" value={form.password} onChange={handleChange} required
-                  placeholder="••••••••"
-                  className="flex-1 text-sm outline-none bg-transparent"
-                />
-                <button type="button" onClick={() => setShowPass(!showPass)} className="text-gray-400 hover:text-[#62826B] transition-colors">
+              <AuthInput icon={<RiLockPasswordLine size={18} />} error={errors.password?.message}>
+                <input {...register('password')} type={showPass ? 'text' : 'password'} placeholder="••••••••"
+                  className="flex-1 text-sm outline-none bg-transparent" />
+                <button type="button" onClick={() => setShowPass(p => !p)} className="text-gray-400 hover:text-[#62826B] transition-colors">
                   {showPass ? <FiEyeOff size={16} /> : <FiEye size={16} />}
                 </button>
-              </div>
+              </AuthInput>
             </div>
 
-            <button
-              type="submit"
-              className="w-full py-3 rounded-full bg-[#62826B] text-[#FFEFC5] font-medium hover:bg-[#11141B] transition-colors duration-300 mt-2"
-            >
-              Sign In
+            <button type="submit" disabled={isLoading}
+              className="w-full py-3 rounded-full bg-[#62826B] text-[#FFEFC5] font-medium hover:bg-[#11141B] transition-colors duration-300 mt-2 disabled:opacity-60">
+              {isLoading ? 'Signing in...' : 'Sign In'}
             </button>
           </form>
 
           <p className="text-center text-sm text-gray-500 mt-6">
             Don't have an account?{' '}
-            <NavLink to="/auth/signup" className="text-[#62826B] font-medium hover:underline">
-              Sign up
-            </NavLink>
+            <NavLink to="/auth/signup" className="text-[#62826B] font-medium hover:underline">Sign up</NavLink>
           </p>
         </div>
 

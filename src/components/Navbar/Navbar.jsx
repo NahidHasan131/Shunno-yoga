@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
-import { NavLink, useLocation } from 'react-router-dom';
+import { NavLink, useLocation, useNavigate } from 'react-router-dom';
 import { FaPhoneAlt } from 'react-icons/fa';
 import { RxHamburgerMenu } from 'react-icons/rx';
 import { IoClose } from 'react-icons/io5';
 import { MdKeyboardArrowDown } from 'react-icons/md';
+import { useSelector, useDispatch } from 'react-redux';
+import { logout } from '../../store/authSlice';
 
 const navLinks = [
   { label: 'Home', path: '/' },
@@ -65,6 +67,14 @@ const Navbar = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [mobileAccordion, setMobileAccordion] = useState(null);
   const location = useLocation();
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const token = useSelector(state => state.auth.token);
+
+  const handleSignOut = () => {
+    dispatch(logout());
+    navigate('/');
+  };
 
   const isParentActive = (link) => {
     if (!link.children) return false;
@@ -114,13 +124,22 @@ const Navbar = () => {
 
           {/* CTA buttons */}
           <div className="hidden md:flex items-center gap-3">
-            <NavLink to="/auth/signup"
-              className="px-5 py-2 rounded-full font-medium border border-[#62826B] text-[#62826B] hover:bg-[#62826B] hover:scale-110 hover:text-[#FFEFC5] transition-all duration-300 ease-in-out transform-gpu">
-              Sign Up
+            {token ? (
+              <button onClick={handleSignOut}
+                className="px-5 py-2 rounded-full font-medium border border-[#62826B] text-[#62826B] hover:bg-[#62826B] hover:text-[#FFEFC5] transition-all duration-300">
+                Sign Out
+              </button>
+            ) : (
+              <NavLink to="/auth/signin"
+                className="px-5 py-2 rounded-full font-medium border border-[#62826B] text-[#62826B] hover:bg-[#62826B] hover:scale-110 hover:text-[#FFEFC5] transition-all duration-300 ease-in-out transform-gpu">
+                Sign In
+              </NavLink>
+            )}
+            <NavLink to="/contact">
+              <button className="w-9 h-9 rounded-full flex items-center justify-center bg-[#62826B] text-white hover:scale-110 transition-all duration-300" aria-label="Call us">
+                <FaPhoneAlt size={14} />
+              </button>
             </NavLink>
-            <button className="w-9 h-9 rounded-full flex items-center justify-center bg-[#62826B] text-white hover:scale-110 transition-all duration-300" aria-label="Call us">
-              <FaPhoneAlt size={14} />
-            </button>
           </div>
 
           {/* Mobile hamburger */}

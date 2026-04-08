@@ -14,6 +14,7 @@ import Signup from './pages/Signup'
 import NotFound from './pages/NotFound'
 import Login from './pages/Login'
 import AdminLayout from './components/admin/AdminLayout'
+import ProtectedRoute from './components/auth/ProtectedRoute'
 import Dashboard from './pages/admin/Dashboard'
 import BlogManager from './pages/admin/BlogManager'
 import VideoManager from './pages/admin/VideoManager'
@@ -60,16 +61,21 @@ function App() {
     { path: '*', element: <NotFound /> },
     {
       path: '/admin',
-      element: <AdminLayout />,
+      element: <ProtectedRoute />,
       children: [
-        { path: '/admin',           element: <Dashboard /> },
-        { path: '/admin/blog',      element: <BlogManager /> },
-        { path: '/admin/videos',    element: <VideoManager /> },
-        { path: '/admin/audio',     element: <AudioManager /> },
-        { path: '/admin/gallery',   element: <GalleryManager /> },
-        { path: '/admin/trainers',  element: <TrainerManager /> },
-        { path: '/admin/events',    element: <EventManager /> },
-        { path: '/admin/settings',  element: <Settings /> },
+        {
+          element: <AdminLayout />,
+          children: [
+            { index: true,              element: <Dashboard /> },
+            { path: 'blog',             element: <BlogManager /> },
+            { path: 'videos',           element: <VideoManager /> },
+            { path: 'audio',            element: <AudioManager /> },
+            { path: 'gallery',          element: <GalleryManager /> },
+            { path: 'trainers',         element: <TrainerManager /> },
+            { path: 'events',           element: <EventManager /> },
+            { path: 'settings',         element: <Settings /> },
+          ]
+        }
       ]
     },
   ])
