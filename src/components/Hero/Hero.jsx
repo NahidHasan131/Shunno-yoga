@@ -1,164 +1,127 @@
-import React, { useState, useRef } from 'react';
+import React, { useRef } from 'react';
 import { NavLink } from 'react-router-dom';
-import { BsCameraVideoFill } from 'react-icons/bs';
-import { FaClock } from 'react-icons/fa';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Autoplay } from 'swiper/modules';
-import { MdArrowBackIos, MdArrowForwardIos } from 'react-icons/md';
+import { Autoplay, Pagination, EffectFade } from 'swiper/modules';
 import 'swiper/css';
-import heroBig from '../../assets/hero-big.jpg';
-import heroMedium from '../../assets/hero-medium.jpg';
-import heroSmall from '../../assets/hero-small.jpg';
+import 'swiper/css/pagination';
+import 'swiper/css/effect-fade';
+import { MdArrowBackIos, MdArrowForwardIos } from 'react-icons/md';
+import heroBig    from '../../assets/hero-big.jpg';
 import morningYoga from '../../assets/morningYoga.jpg';
-import meditation from '../../assets/meditation.jpg';
-import powerYoga from '../../assets/powerYoga.jpg';
+import powerYoga  from '../../assets/powerYoga.jpg';
 
 const slides = [
   {
-    badge: 'Welcome To Shunno Yoga',
-    title: 'Discover the Power of Yoga & Meditation',
-    desc: 'Id massa id tortor interdum consectetur eu ultrices viverra. Est aliquet pellentesque potenti.',
-    bigImg: heroBig,
-    cardImg: heroSmall,
-    bottomImg: heroMedium,
-    cardTitle: 'Yoga For Beginners',
-    cardVideos: '6 Videos',
-    cardHours: '12 Hours',
+    img:     heroBig,
+    badge:   'Welcome To Shunno Yoga',
+    title:   'Discover the Power of Yoga & Meditation',
+    desc:    'Begin your wellness journey with expert-led classes designed for all levels. Find peace, strength and balance.',
     ctaPath: '/media',
+    ctaText: 'Explore Classes',
   },
   {
-    badge: 'Find Your Inner Peace',
-    title: 'Start Your Morning with Mindful Yoga Flow',
-    desc: 'Tristique posuere bibendum id auctor pellentesque. Donec diam blandit vitae quam in donec.',
-    bigImg: morningYoga,
-    cardImg: meditation,
-    bottomImg: powerYoga,
-    cardTitle: 'Morning Flow',
-    cardVideos: '8 Videos',
-    cardHours: '10 Hours',
+    img:     morningYoga,
+    badge:   'Find Your Inner Peace',
+    title:   'Start Your Morning with Mindful Yoga Flow',
+    desc:    'A gentle morning routine that energizes your body and clears your mind before the day begins.',
     ctaPath: '/media/audio',
+    ctaText: 'Listen Now',
   },
   {
-    badge: 'Transform Your Life',
-    title: 'Build Strength & Balance Through Meditation',
-    desc: 'Amet amet quam tincidunt faucibus eget ac porta. Dictum tristique in at est pellentesque.',
-    bigImg: powerYoga,
-    cardImg: morningYoga,
-    bottomImg: meditation,
-    cardTitle: 'Power Yoga',
-    cardVideos: '10 Videos',
-    cardHours: '15 Hours',
+    img:     powerYoga,
+    badge:   'Transform Your Life',
+    title:   'Build Strength & Balance Through Meditation',
+    desc:    'Challenge yourself with power yoga and guided meditation sessions led by certified instructors.',
     ctaPath: '/media/video',
+    ctaText: 'Watch Videos',
   },
 ];
 
 const Hero = () => {
-  const [activeIndex, setActiveIndex] = useState(0);
   const swiperRef = useRef(null);
-  const s = slides[activeIndex];
-
-  const handlePrev = () => swiperRef.current?.slidePrev();
-  const handleNext = () => swiperRef.current?.slideNext();
 
   return (
-    <section className="max-w-340 mx-auto px-6 lg:px-12 py-12 lg:py-20 overflow-hidden">
-      <div className="flex flex-col lg:flex-row items-center gap-10">
+    <section className="relative w-full">
+      <Swiper
+        modules={[Autoplay, Pagination, EffectFade]}
+        effect="fade"
+        autoplay={{ delay: 2000, disableOnInteraction: false }}
+        pagination={{ clickable: true }}
+        loop={true}
+        speed={800}
+        onSwiper={swiper => (swiperRef.current = swiper)}
+        className="w-full"
+      >
+        {slides.map((slide, i) => (
+          <SwiperSlide key={i}>
+            <div className="relative w-full h-[80vh] min-h-120">
+              {/* Background image */}
+              <img
+                src={slide.img}
+                alt={slide.title}
+                className="absolute inset-0 w-full h-full object-cover"
+              />
+              {/* Overlay */}
+              <div className="absolute inset-0 bg-[#11141B]/60" />
 
-        {/* Left content */}
-        <div className="flex-1 flex flex-col gap-6">
-          <div key={activeIndex} className="flex flex-col gap-6 animate-fade-in">
-            <span className="self-start text-sm px-4 py-1.5 rounded-full border border-gray-300 text-gray-800">
-              {s.badge}
-            </span>
-
-            <h1 className="text-4xl lg:text-6xl font-medium text-[#11141B] leading-tight">
-              {s.title}
-            </h1>
-
-            <p className="text-gray-500 font-medium leading-relaxed max-w-md">
-              {s.desc}
-            </p>
-
-            <NavLink
-              to={s.ctaPath}
-              className="self-start px-8 py-3 rounded-full font-medium text-[#FFEFC5] bg-[#62826B] hover:bg-[#11141B] hover:scale-110 transition-all duration-300"
-            >
-              Let's Get Started
-            </NavLink>
-
-            <div className="flex items-center gap-3 mt-12">
-              <div className="flex -space-x-4">
-                <img src={heroSmall} alt="member" className="w-13 h-13 rounded-full object-cover border-2 border-white" />
-                <img src={heroBig} alt="member" className="w-13 h-13 rounded-full object-cover border-2 border-white" />
-                <span className="text-xs font-semibold bg-gray-100 w-13 h-13 rounded-full text-gray-600 flex items-center justify-center">81K+</span>
-              </div>
-              <span className="text-md text-[#11141B]">Worldwide Members</span>
-            </div>
-          </div>
-
-          {/* Arrows — outside key div, always visible */}
-          <div className="flex items-center gap-3 mt-12">
-            <button
-              onClick={handlePrev}
-              className="w-10 h-10 rounded-full border border-gray-300 flex items-center justify-center hover:bg-[#62826B] hover:border-[#62826B] hover:text-white transition-all duration-300"
-            >
-              <MdArrowBackIos size={16} />
-            </button>
-            <button
-              onClick={handleNext}
-              className="w-10 h-10 rounded-full border border-gray-300 flex items-center justify-center hover:bg-[#62826B] hover:border-[#62826B] hover:text-white transition-all duration-300"
-            >
-              <MdArrowForwardIos size={16} />
-            </button>
-            <span className="text-sm text-gray-400">{activeIndex + 1} / {slides.length}</span>
-          </div>
-        </div>
-
-        {/* Right — Swiper only slides images, hidden on mobile */}
-        <div className="flex-1 overflow-hidden hidden lg:block">
-          <Swiper
-            modules={[Autoplay]}
-            autoplay={{ delay: 4000, disableOnInteraction: false }}
-            loop={true}
-            speed={700}
-            onSwiper={(swiper) => (swiperRef.current = swiper)}
-            onSlideChange={(swiper) => setActiveIndex(swiper.realIndex)}
-          >
-            {slides.map((slide, i) => (
-              <SwiperSlide key={i}>
-                <div className="relative flex flex-col items-end gap-6">
-                  {/* Big image */}
-                  <img
-                    src={slide.bigImg}
-                    alt="yoga class"
-                    className="w-full max-w-151 rounded-2xl object-cover h-102 ml-auto"
-                  />
-
-                  {/* Card overlay */}
-                  <div className="absolute bottom-25 left-10  bg-white border-[#E1EDE4] border-4 rounded-2xl shadow-xl overflow-hidden">
-                    <img src={slide.cardImg} alt={slide.cardTitle} className="w-76 h-45 object-cover" />
-                    <div className="px-6 py-3">
-                      <p className="text-xl font-semibold text-[#11141B] py-3">{slide.cardTitle}</p>
-                      <div className="flex items-center gap-5 mt-1.5 mb-4 font-semibold text-[#62826B]/70">
-                        <span className="flex items-center gap-2">
-                          <BsCameraVideoFill size={20} className="text-[#62826B]" /> {slide.cardVideos}
-                        </span>
-                        <span className="flex items-center gap-2">
-                          <FaClock size={20} className="text-[#62826B]" /> {slide.cardHours}
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Bottom image */}
-                  <img src={slide.bottomImg} alt="yoga session" className="w-93 h-65 rounded-2xl object-cover" />
+              {/* Content */}
+              <div className="relative z-10 h-full flex items-center justify-center">
+                <div className="max-w-3xl mx-auto px-6 text-center flex flex-col items-center gap-6">
+                  <span className="px-5 py-2 rounded-full bg-white/20 text-white text-sm font-medium backdrop-blur-sm border border-white/20">
+                    {slide.badge}
+                  </span>
+                  <h1 className="text-4xl lg:text-6xl font-bold text-white leading-tight">
+                    {slide.title}
+                  </h1>
+                  <p className="text-gray-200 text-base lg:text-lg leading-relaxed max-w-xl">
+                    {slide.desc}
+                  </p>
+                  <NavLink
+                    to={slide.ctaPath}
+                    className="px-8 py-3.5 rounded-full bg-[#62826B] text-[#FFEFC5] font-semibold text-sm hover:bg-white hover:text-[#62826B] transition-all duration-300"
+                  >
+                    {slide.ctaText}
+                  </NavLink>
                 </div>
-              </SwiperSlide>
-            ))}
-          </Swiper>
-        </div>
+              </div>
+            </div>
+          </SwiperSlide>
+        ))}
+      </Swiper>
 
-      </div>
+      {/* Prev arrow */}
+      <button
+        onClick={() => swiperRef.current?.slidePrev()}
+        className="absolute left-4 lg:left-8 top-1/2 -translate-y-1/2 z-20 w-11 h-11 rounded-full bg-white/20 backdrop-blur-sm border border-white/30 flex items-center justify-center text-white hover:bg-white/40 transition-colors duration-200"
+        aria-label="Previous"
+      >
+        <MdArrowBackIos size={18} />
+      </button>
+
+      {/* Next arrow */}
+      <button
+        onClick={() => swiperRef.current?.slideNext()}
+        className="absolute right-4 lg:right-8 top-1/2 -translate-y-1/2 z-20 w-11 h-11 rounded-full bg-white/20 backdrop-blur-sm border border-white/30 flex items-center justify-center text-white hover:bg-white/40 transition-colors duration-200"
+        aria-label="Next"
+      >
+        <MdArrowForwardIos size={18} />
+      </button>
+
+      {/* Custom dot styles */}
+      <style>{`
+        .swiper-pagination-bullet {
+          background: white;
+          opacity: 0.5;
+          width: 8px;
+          height: 8px;
+        }
+        .swiper-pagination-bullet-active {
+          opacity: 1;
+          width: 24px;
+          border-radius: 4px;
+          background: #62826B;
+        }
+      `}</style>
     </section>
   );
 };
