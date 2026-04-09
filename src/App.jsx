@@ -4,6 +4,7 @@ import './App.css'
 import Home from './pages/Home'
 import About from './pages/About'
 import Blog from './pages/BlogPage'
+import BlogDetail from './pages/BlogDetail'
 import Audio from './pages/Audio'
 import Video from './pages/Video'
 import Contact from './pages/Contact'
@@ -49,6 +50,7 @@ function App() {
           ]
         },
         { path: '/blog', element: <Blog /> },
+        { path: '/blog/:id', element: <BlogDetail /> },
         { path: '/contact', element: <Contact /> },
       ]
     },

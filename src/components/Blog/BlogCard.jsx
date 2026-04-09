@@ -3,12 +3,13 @@ import { NavLink } from 'react-router-dom';
 import { FaUser } from 'react-icons/fa';
 
 const BlogCard = ({ post }) => {
-  const { img, tag, date, author, title, desc, path = '/blog' } = post;
+  const { img, tag, date, author, title, desc, path = '/blog', id } = post;
+  const to = id ? `/blog/${id}` : path;
 
   return (
     <div className="flex flex-col bg-white border border-gray-100 rounded-2xl overflow-hidden hover:shadow-md transition-shadow duration-300">
       {/* Image */}
-      <NavLink to={path} className="block overflow-hidden">
+      <NavLink to={to} className="block overflow-hidden">
         <img
           src={img}
           alt={title}
@@ -24,7 +25,7 @@ const BlogCard = ({ post }) => {
           </span>
         </div>
 
-        <NavLink to={path}>
+        <NavLink to={to}>
           <h3 className="text-2xl font-semibold text-[#11141B] hover:text-[#62826B] transition-colors duration-300 leading-snug">
             {title}
           </h3>

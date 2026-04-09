@@ -1,7 +1,18 @@
 import React from 'react';
+import { useSearchParams } from 'react-router-dom';
 
-const Pagination = ({ page, totalPages, total, label, onPageChange }) => {
+const Pagination = ({ page, totalPages, total, label, onPageChange, useUrl = false }) => {
+  const [searchParams, setSearchParams] = useSearchParams();
+
   if (totalPages <= 1) return null;
+
+  const handleChange = (p) => {
+    if (useUrl) {
+      setSearchParams({ page: p });
+    }
+    onPageChange(p);
+  };
+
   return (
     <div className="flex items-center justify-between pt-8 mt-4 border-t border-gray-200">
       <span className="text-sm text-gray-400">
@@ -9,7 +20,7 @@ const Pagination = ({ page, totalPages, total, label, onPageChange }) => {
       </span>
       <div className="flex items-center gap-2">
         <button
-          onClick={() => onPageChange(Math.max(1, page - 1))}
+          onClick={() => handleChange(Math.max(1, page - 1))}
           disabled={page === 1}
           className="px-4 py-2 rounded-full text-sm font-medium border border-gray-200 hover:bg-[#62826B] hover:text-[#FFEFC5] hover:border-[#62826B] disabled:opacity-30 disabled:cursor-not-allowed transition-all duration-200"
         >
@@ -18,7 +29,7 @@ const Pagination = ({ page, totalPages, total, label, onPageChange }) => {
         {Array.from({ length: totalPages }, (_, i) => i + 1).map(p => (
           <button
             key={p}
-            onClick={() => onPageChange(p)}
+            onClick={() => handleChange(p)}
             className="w-9 h-9 rounded-full text-sm font-medium border transition-all duration-200"
             style={{
               backgroundColor: page === p ? '#62826B' : 'white',
@@ -30,7 +41,7 @@ const Pagination = ({ page, totalPages, total, label, onPageChange }) => {
           </button>
         ))}
         <button
-          onClick={() => onPageChange(Math.min(totalPages, page + 1))}
+          onClick={() => handleChange(Math.min(totalPages, page + 1))}
           disabled={page === totalPages}
           className="px-4 py-2 rounded-full text-sm font-medium border border-gray-200 hover:bg-[#62826B] hover:text-[#FFEFC5] hover:border-[#62826B] disabled:opacity-30 disabled:cursor-not-allowed transition-all duration-200"
         >

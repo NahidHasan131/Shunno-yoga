@@ -60,7 +60,7 @@ const BlogPage = () => {
                 <span className="text-sm font-medium text-[#62826B]">Featured Post</span>
               </div>
               <div className="grid md:grid-cols-2 gap-0 items-stretch bg-[#F0F7F2] rounded-3xl overflow-hidden">
-                <NavLink to="/blog" className="block overflow-hidden h-72 md:h-auto">
+                <NavLink to={`/blog/${featured._id}`} className="block overflow-hidden h-72 md:h-auto">
                   <img src={featured.image} alt={featured.title}
                     className="w-full h-full object-cover hover:scale-105 transition-transform duration-500" />
                 </NavLink>
@@ -70,13 +70,13 @@ const BlogPage = () => {
                     <span>·</span>
                     <span>{formatDate(featured.createdAt)}</span>
                   </div>
-                  <NavLink to="/blog">
+                  <NavLink to={`/blog/${featured._id}`}>
                     <h2 className="text-2xl lg:text-3xl font-bold text-[#11141B] leading-tight hover:text-[#62826B] transition-colors duration-300">
                       {featured.title}
                     </h2>
                   </NavLink>
                   <p className="text-gray-500 leading-relaxed line-clamp-3">{featured.content}</p>
-                  <NavLink to="/blog"
+                  <NavLink to={`/blog/${featured._id}`}
                     className="self-start flex items-center gap-2 px-6 py-2.5 rounded-full bg-[#62826B] text-[#FFEFC5] text-sm font-medium hover:bg-[#11141B] transition-colors duration-300">
                     Read More <MdArrowForward size={16} />
                   </NavLink>

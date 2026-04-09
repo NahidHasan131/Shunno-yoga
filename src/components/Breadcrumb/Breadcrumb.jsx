@@ -13,19 +13,23 @@ const pageMeta = {
   '/contact':       { title: 'Contact Us',    desc: 'Get in touch with us for classes, queries or partnerships.' },
 };
 
-const Breadcrumb = () => {
+const Breadcrumb = ({ title: propTitle, desc: propDesc, crumbs: propCrumbs }) => {
   const location = useLocation();
   const pathname = location.pathname;
   const meta = pageMeta[pathname] || { title: 'Page', desc: '' };
 
-  // build crumbs from path segments
+  const title = propTitle || meta.title;
+  const desc  = propDesc  || meta.desc;
+
   const segments = pathname.split('/').filter(Boolean);
-  const crumbs = [{ label: 'Home', path: '/' }];
+  const autoCrumbs = [{ label: 'Home', path: '/' }];
   segments.forEach((seg, i) => {
     const path = '/' + segments.slice(0, i + 1).join('/');
     const label = pageMeta[path]?.title || seg.charAt(0).toUpperCase() + seg.slice(1);
-    crumbs.push({ label, path });
+    autoCrumbs.push({ label, path });
   });
+
+  const crumbs = propCrumbs || autoCrumbs;
 
   return (
     <div
@@ -40,9 +44,9 @@ const Breadcrumb = () => {
 
         {/* Left: title + desc */}
         <div className="flex flex-col gap-3">
-          <h1 className="text-4xl lg:text-5xl font-bold text-white">{meta.title}</h1>
-          {meta.desc && (
-            <p className="text-gray-300 text-sm leading-relaxed max-w-sm">{meta.desc}</p>
+          <h1 className="text-4xl lg:text-5xl font-bold text-white">{title}</h1>
+          {desc && (
+            <p className="text-gray-300 text-sm leading-relaxed max-w-sm">{desc}</p>
           )}
         </div>
 
