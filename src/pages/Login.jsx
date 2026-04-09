@@ -9,6 +9,7 @@ import { FiEye, FiEyeOff } from 'react-icons/fi';
 import { useLoginMutation } from '../store/authApi';
 import { useDispatch } from 'react-redux';
 import { setCredentials } from '../store/authSlice';
+import { toast } from 'sonner';
 import AuthInput from '../components/auth/AuthInput';
 
 const schema = yup.object({
@@ -30,9 +31,11 @@ const Login = () => {
     try {
       const res = await login(data).unwrap();
       dispatch(setCredentials(res.data));
+      toast.success('Signed in successfully!');
       navigate('/admin');
     } catch (err) {
-      console.error(err);
+      toast.error(err?.data?.message || 'Login failed. Please check your credentials.');
+      console.error('Login error:', err);
     }
   };
 

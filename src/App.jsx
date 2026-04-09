@@ -1,4 +1,5 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
+import { Toaster } from 'sonner'
 import './App.css'
 import Home from './pages/Home'
 import About from './pages/About'
@@ -22,7 +23,7 @@ import AudioManager from './pages/admin/AudioManager'
 import GalleryManager from './pages/admin/GalleryManager'
 import TrainerManager from './pages/admin/TrainerManager'
 import EventManager from './pages/admin/EventManager'
-import Settings from './pages/admin/Settings'
+import Profile from './pages/admin/Profile'
 
 function App() {
   const router = createBrowserRouter([
@@ -73,7 +74,7 @@ function App() {
             { path: 'gallery',          element: <GalleryManager /> },
             { path: 'trainers',         element: <TrainerManager /> },
             { path: 'events',           element: <EventManager /> },
-            { path: 'settings',         element: <Settings /> },
+            { path: 'profile',          element: <Profile /> },
           ]
         }
       ]
@@ -82,6 +83,7 @@ function App() {
 
   return (
     <>
+      <Toaster position="top-right" richColors />
       <RouterProvider router={router}/>
     </>
   )

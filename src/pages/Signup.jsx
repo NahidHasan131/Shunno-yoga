@@ -10,6 +10,7 @@ import { FaUser } from 'react-icons/fa';
 import { useRegisterMutation } from '../store/authApi';
 import { useDispatch } from 'react-redux';
 import { setCredentials } from '../store/authSlice';
+import { toast } from 'sonner';
 import AuthInput from '../components/auth/AuthInput';
 
 const schema = yup.object({
@@ -38,9 +39,10 @@ const Signup = () => {
         mobile: data.phone, password: data.password,
       }).unwrap();
       dispatch(setCredentials(res.data));
-      
+      toast.success('Account created! Please sign in.');
       navigate('/auth/signin');
     } catch (err) {
+      toast.error(err?.data?.message || 'Registration failed. Please try again.');
       console.error('Register error:', err);
     }
   };

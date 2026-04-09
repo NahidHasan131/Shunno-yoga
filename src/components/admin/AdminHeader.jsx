@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
-import { MdNotifications, MdAccountCircle, MdLogout, MdKeyboardArrowDown } from 'react-icons/md';
+import { MdNotifications, MdAccountCircle, MdLogout, MdKeyboardArrowDown, MdPerson } from 'react-icons/md';
 import { RxHamburgerMenu } from 'react-icons/rx';
 import { useSelector, useDispatch } from 'react-redux';
 import { logout } from '../../store/authSlice';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, NavLink } from 'react-router-dom';
+import { toast } from 'sonner';
 
 const AdminHeader = ({ onMenuClick }) => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
@@ -13,6 +14,7 @@ const AdminHeader = ({ onMenuClick }) => {
 
   const handleSignOut = () => {
     dispatch(logout());
+    toast.success('Signed out successfully.');
     navigate('/auth/signin');
   };
 
@@ -37,6 +39,11 @@ const AdminHeader = ({ onMenuClick }) => {
           >
             <MdAccountCircle size={28} className="text-[#62826B]" />
             <span className="font-medium hidden sm:block">{user?.name || 'Admin'}</span>
+            {user?.role && (
+              <span className="hidden sm:block text-xs px-2 py-0.5 rounded-full bg-[#62826B]/10 text-[#62826B] font-medium capitalize">
+                {user.role}
+              </span>
+            )}
             <MdKeyboardArrowDown size={16} className={`transition-transform duration-200 ${dropdownOpen ? 'rotate-180' : ''}`} />
           </button>
 
@@ -48,6 +55,11 @@ const AdminHeader = ({ onMenuClick }) => {
                   <p className="font-semibold text-[#11141B] text-sm">{user?.name || 'Admin'}</p>
                   <p className="text-xs text-gray-400 mt-0.5">{user?.email || ''}</p>
                 </div>
+                <NavLink to="/admin/profile"
+                  onClick={() => setDropdownOpen(false)}
+                  className="w-full flex items-center gap-3 px-4 py-3 text-sm text-gray-600 hover:bg-gray-50 transition-colors">
+                  <MdPerson size={16} /> View Profile
+                </NavLink>
                 <button
                   onClick={handleSignOut}
                   className="w-full flex items-center gap-3 px-4 py-3 text-sm text-red-500 hover:bg-red-50 transition-colors"

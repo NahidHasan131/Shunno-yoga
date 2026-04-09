@@ -2,7 +2,7 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import {
   MdDashboard, MdArticle, MdVideoLibrary, MdAudiotrack,
-  MdPhotoLibrary, MdPeople, MdEvent, MdSettings
+  MdPhotoLibrary, MdPeople, MdEvent, MdSettings, MdPerson
 } from 'react-icons/md';
 import { TbLayoutSidebarLeftCollapse, TbLayoutSidebarLeftExpand } from 'react-icons/tb';
 import { HiHome } from 'react-icons/hi';
@@ -16,7 +16,7 @@ const navItems = [
   { label: 'Gallery',    path: '/admin/gallery',    icon: <MdPhotoLibrary size={20} /> },
   { label: 'Trainers',   path: '/admin/trainers',   icon: <MdPeople size={20} /> },
   { label: 'Events',     path: '/admin/events',     icon: <MdEvent size={20} /> },
-  { label: 'Settings',   path: '/admin/settings',   icon: <MdSettings size={20} /> },
+  { label: 'Profile',    path: '/admin/profile',    icon: <MdPerson size={20} /> },
 ];
 
 const AdminSidebar = ({ open, onToggle }) => {

@@ -6,6 +6,7 @@ import { IoClose } from 'react-icons/io5';
 import { MdKeyboardArrowDown } from 'react-icons/md';
 import { useSelector, useDispatch } from 'react-redux';
 import { logout } from '../../store/authSlice';
+import { toast } from 'sonner';
 
 const navLinks = [
   { label: 'Home', path: '/' },
@@ -73,6 +74,7 @@ const Navbar = () => {
 
   const handleSignOut = () => {
     dispatch(logout());
+    toast.success('Signed out successfully.');
     navigate('/');
   };
 
@@ -125,10 +127,16 @@ const Navbar = () => {
           {/* CTA buttons */}
           <div className="hidden md:flex items-center gap-3">
             {token ? (
-              <button onClick={handleSignOut}
-                className="px-5 py-2 rounded-full font-medium border border-[#62826B] text-[#62826B] hover:bg-[#62826B] hover:text-[#FFEFC5] transition-all duration-300">
-                Sign Out
-              </button>
+              <>
+                <NavLink to="/admin"
+                  className="px-5 py-2 rounded-full font-medium bg-[#62826B] text-[#FFEFC5] hover:bg-[#11141B] transition-all duration-300">
+                  Admin panel
+                </NavLink>
+                <button onClick={handleSignOut}
+                  className="px-5 py-2 rounded-full font-medium border border-[#62826B] text-[#62826B] hover:bg-[#62826B] hover:text-[#FFEFC5] transition-all duration-300">
+                  Sign Out
+                </button>
+              </>
             ) : (
               <NavLink to="/auth/signin"
                 className="px-5 py-2 rounded-full font-medium border border-[#62826B] text-[#62826B] hover:bg-[#62826B] hover:scale-110 hover:text-[#FFEFC5] transition-all duration-300 ease-in-out transform-gpu">
@@ -209,6 +217,29 @@ const Navbar = () => {
             </li>
           ))}
         </ul>
+
+        {/* Mobile auth buttons */}
+        <div className="px-6 pt-4 pb-6 flex flex-col gap-3 border-t border-gray-200 mt-4">
+          {token ? (
+            <>
+              <NavLink to="/admin"
+                onClick={() => setMobileOpen(false)}
+                className="block text-center py-2.5 rounded-full bg-[#62826B] text-[#FFEFC5] text-sm font-medium">
+                Admin Panel
+              </NavLink>
+              <button onClick={() => { handleSignOut(); setMobileOpen(false); }}
+                className="w-full py-2.5 rounded-full border border-[#62826B] text-[#62826B] text-sm font-medium">
+                Sign Out
+              </button>
+            </>
+          ) : (
+            <NavLink to="/auth/signin"
+              onClick={() => setMobileOpen(false)}
+              className="block text-center py-2.5 rounded-full bg-[#62826B] text-[#FFEFC5] text-sm font-medium">
+              Sign In
+            </NavLink>
+          )}
+        </div>
       </div>
     </>
   );
