@@ -4,12 +4,15 @@ import { IoTimeOutline } from 'react-icons/io5';
 import { PiStackLight } from 'react-icons/pi';
 import Pagination from './Pagination';
 
+import { useSearchParams } from 'react-router-dom';
+
 const PER_PAGE = 6;
 
 const VideoGrid = ({ videos, categories }) => {
+  const [searchParams] = useSearchParams();
   const [activeCategory, setActiveCategory] = useState('All');
   const [activeVideo, setActiveVideo] = useState(null);
-  const [page, setPage] = useState(1);
+  const [page, setPage] = useState(Number(searchParams.get('page')) || 1);
 
   const filtered = activeCategory === 'All' ? videos : videos.filter(v => v.category === activeCategory);
   const totalPages = Math.ceil(filtered.length / PER_PAGE);
@@ -71,7 +74,7 @@ const VideoGrid = ({ videos, categories }) => {
         ))}
       </div>
 
-      <Pagination page={page} totalPages={totalPages} total={filtered.length} label="videos" onPageChange={setPage} />
+      <Pagination page={page} totalPages={totalPages} total={filtered.length} label="videos" limit={PER_PAGE} onPageChange={setPage} />
     </div>
   );
 };

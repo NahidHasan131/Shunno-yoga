@@ -1,15 +1,15 @@
 import React from 'react';
 import { useSearchParams } from 'react-router-dom';
 
-const Pagination = ({ page, totalPages, total, label, onPageChange, useUrl = false }) => {
-  const [searchParams, setSearchParams] = useSearchParams();
+const Pagination = ({ page, totalPages, total, label, onPageChange, limit }) => {
+  const [, setSearchParams] = useSearchParams();
 
   if (totalPages <= 1) return null;
 
   const handleChange = (p) => {
-    if (useUrl) {
-      setSearchParams({ page: p });
-    }
+    const params = { page: p };
+    if (limit) params.limit = limit;
+    setSearchParams(params);
     onPageChange(p);
   };
 

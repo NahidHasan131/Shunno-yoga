@@ -1,14 +1,13 @@
 import React, { useRef } from 'react';
 import { NavLink } from 'react-router-dom';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Autoplay, Pagination, EffectFade } from 'swiper/modules';
+import { Autoplay, Pagination } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/pagination';
-import 'swiper/css/effect-fade';
-import { MdArrowBackIos, MdArrowForwardIos } from 'react-icons/md';
-import heroBig    from '../../assets/hero-big.jpg';
+import { MdChevronLeft, MdChevronRight } from 'react-icons/md';
+import heroBig     from '../../assets/hero-big.jpg';
 import morningYoga from '../../assets/morningYoga.jpg';
-import powerYoga  from '../../assets/powerYoga.jpg';
+import powerYoga   from '../../assets/powerYoga.jpg';
 
 const slides = [
   {
@@ -41,30 +40,47 @@ const Hero = () => {
   const swiperRef = useRef(null);
 
   return (
-    <section className="relative w-full">
+    <section className="relative w-full overflow-hidden">
+      <style>{`
+        .hero-swiper { overflow: hidden !important; }
+        .hero-swiper .swiper-wrapper { align-items: stretch; }
+        .hero-swiper .swiper-slide { overflow: hidden; }
+        .hero-swiper .swiper-slide .hero-img {
+          transform: scale(1);
+          transition: transform 6s ease;
+        }
+        .hero-swiper .swiper-slide-active .hero-img {
+          transform: scale(1.1);
+        }
+        .swiper-pagination-bullet {
+          background: white; opacity: 0.5; width: 8px; height: 8px;
+        }
+        .swiper-pagination-bullet-active {
+          opacity: 1; width: 24px; border-radius: 4px; background: #62826B;
+        }
+      `}</style>
+
       <Swiper
-        modules={[Autoplay, Pagination, EffectFade]}
-        effect="fade"
-        autoplay={{ delay: 2000, disableOnInteraction: false }}
+        className="hero-swiper"
+        modules={[Autoplay, Pagination]}
+        autoplay={{ delay: 3000, disableOnInteraction: false, pauseOnMouseEnter: true }}
         pagination={{ clickable: true }}
         loop={true}
-        speed={800}
+        speed={900}
+        spaceBetween={0}
+        slidesPerView={1}
         onSwiper={swiper => (swiperRef.current = swiper)}
-        className="w-full"
       >
         {slides.map((slide, i) => (
           <SwiperSlide key={i}>
-            <div className="relative w-full h-[80vh] min-h-120">
-              {/* Background image */}
+            <div className="relative w-full h-[87vh] min-h-125">
               <img
                 src={slide.img}
                 alt={slide.title}
-                className="absolute inset-0 w-full h-full object-cover"
+                className="hero-img absolute inset-0 w-full h-full object-cover"
               />
-              {/* Overlay */}
               <div className="absolute inset-0 bg-[#11141B]/60" />
 
-              {/* Content */}
               <div className="relative z-10 h-full flex items-center justify-center">
                 <div className="max-w-3xl mx-auto px-6 text-center flex flex-col items-center gap-6">
                   <span className="px-5 py-2 rounded-full bg-white/20 text-white text-sm font-medium backdrop-blur-sm border border-white/20">
@@ -89,39 +105,21 @@ const Hero = () => {
         ))}
       </Swiper>
 
-      {/* Prev arrow */}
       <button
         onClick={() => swiperRef.current?.slidePrev()}
         className="absolute left-4 lg:left-8 top-1/2 -translate-y-1/2 z-20 w-11 h-11 rounded-full bg-white/20 backdrop-blur-sm border border-white/30 flex items-center justify-center text-white hover:bg-white/40 transition-colors duration-200"
         aria-label="Previous"
       >
-        <MdArrowBackIos size={18} />
+        <MdChevronLeft size={24} />
       </button>
 
-      {/* Next arrow */}
       <button
         onClick={() => swiperRef.current?.slideNext()}
         className="absolute right-4 lg:right-8 top-1/2 -translate-y-1/2 z-20 w-11 h-11 rounded-full bg-white/20 backdrop-blur-sm border border-white/30 flex items-center justify-center text-white hover:bg-white/40 transition-colors duration-200"
         aria-label="Next"
       >
-        <MdArrowForwardIos size={18} />
+        <MdChevronRight size={24} />
       </button>
-
-      {/* Custom dot styles */}
-      <style>{`
-        .swiper-pagination-bullet {
-          background: white;
-          opacity: 0.5;
-          width: 8px;
-          height: 8px;
-        }
-        .swiper-pagination-bullet-active {
-          opacity: 1;
-          width: 24px;
-          border-radius: 4px;
-          background: #62826B;
-        }
-      `}</style>
     </section>
   );
 };

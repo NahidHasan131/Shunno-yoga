@@ -4,6 +4,8 @@ import { MdSkipNext, MdSkipPrevious } from 'react-icons/md';
 import { IoVolumeHighOutline, IoVolumeMuteOutline } from 'react-icons/io5';
 import Pagination from './Pagination';
 
+import { useSearchParams } from 'react-router-dom';
+
 const TRACKS_PER_PAGE = 5;
 
 const formatTime = (sec) => {
@@ -12,13 +14,14 @@ const formatTime = (sec) => {
 };
 
 const AudioPlayer = ({ tracks }) => {
+  const [searchParams] = useSearchParams();
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isPlaying, setIsPlaying] = useState(false);
   const [progress, setProgress] = useState(0);
   const [duration, setDuration] = useState(0);
   const [volume, setVolume] = useState(1);
   const [muted, setMuted] = useState(false);
-  const [page, setPage] = useState(1);
+  const [page, setPage] = useState(Number(searchParams.get('page')) || 1);
   const audioRef = useRef(null);
 
   const totalPages = Math.ceil(tracks.length / TRACKS_PER_PAGE);

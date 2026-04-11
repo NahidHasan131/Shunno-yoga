@@ -5,6 +5,7 @@ import * as yup from 'yup';
 import { toast } from 'sonner';
 import { MdAdd, MdEdit, MdDelete, MdArticle, MdSearch, MdImage } from 'react-icons/md';
 import { useGetBlogsQuery, useCreateBlogMutation, useUpdateBlogMutation, useDeleteBlogMutation } from '../../store/blogsApi';
+import { useSearchParams } from 'react-router-dom';
 import AdminModal from '../../components/admin/AdminModal';
 import AdminFormField from '../../components/admin/AdminFormField';
 import ImageInput from '../../components/admin/ImageInput';
@@ -17,7 +18,8 @@ const schema = yup.object({
 
 const BlogManager = () => {
   const [search, setSearch]           = useState('');
-  const [page, setPage]               = useState(1);
+  const [searchParams] = useSearchParams();
+  const [page, setPage]               = useState(Number(searchParams.get('page')) || 1);
   const [showForm, setShowForm]       = useState(false);
   const [editingPost, setEditingPost] = useState(null);
   const [deleteId, setDeleteId]     = useState(null);
@@ -140,7 +142,7 @@ const BlogManager = () => {
       </div>
 
       {/* Pagination */}
-      <Pagination page={page} totalPages={totalPages} total={total} label="posts" onPageChange={setPage} />
+      <Pagination page={page} totalPages={totalPages} total={total} label="posts" limit={10} onPageChange={setPage} />
 
       {/* Create / Edit modal */}
       {showForm && (

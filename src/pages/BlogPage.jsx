@@ -6,6 +6,7 @@ import Breadcrumb from '../components/Breadcrumb/Breadcrumb';
 import BlogCard from '../components/Blog/BlogCard';
 import Pagination from '../components/Media/Pagination';
 import { useGetBlogsQuery } from '../store/blogsApi';
+import { useSearchParams } from 'react-router-dom';
 
 const PER_PAGE = 6;
 
@@ -13,7 +14,8 @@ const formatDate = (d) =>
   d ? new Date(d).toLocaleDateString('en-US', { day: 'numeric', month: 'short', year: 'numeric' }) : '—';
 
 const BlogPage = () => {
-  const [page, setPage] = useState(1);
+  const [searchParams] = useSearchParams();
+  const [page, setPage] = useState(Number(searchParams.get('page')) || 1);
   const [search, setSearch] = useState('');
 
   const { data, isLoading } = useGetBlogsQuery({ page, limit: PER_PAGE });
@@ -106,7 +108,7 @@ const BlogPage = () => {
                 </div>
 
                 <div className="mt-8">
-                  <Pagination page={page} totalPages={totalPages} total={total} label="posts" onPageChange={setPage} />
+                  <Pagination page={page} totalPages={totalPages} total={total} label="posts" limit={PER_PAGE} onPageChange={setPage} />
                 </div>
               </div>
 
