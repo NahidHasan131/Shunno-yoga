@@ -6,7 +6,9 @@ import { PiStackLight } from 'react-icons/pi';
 import AudioPlayer from '../components/Media/AudioPlayer';
 import VideoGrid from '../components/Media/VideoGrid';
 import ImageGallery from '../components/Media/ImageGallery';
-import { tracks, videos, videoCategories, galleryImages, galleryTags } from '../data/mediaData';
+import { useGetAudiosQuery } from '../store/audioApi';
+import { useGetVideosQuery } from '../store/videoApi';
+import { useGetGalleryQuery } from '../store/galleryApi';
 
 import morningYoga from '../assets/morningYoga.jpg';
 import meditation from '../assets/meditation.jpg';
@@ -22,6 +24,14 @@ const tabs = ['Classes', 'Videos', 'Audio', 'Gallery'];
 
 const Media = () => {
   const [activeTab, setActiveTab] = useState('Classes');
+
+  const { data: audioData, isLoading: audioLoading } = useGetAudiosQuery();
+  const { data: videoData, isLoading: videoLoading } = useGetVideosQuery();
+  const { data: galleryData, isLoading: galleryLoading } = useGetGalleryQuery();
+
+  const tracks  = audioData?.data   || [];
+  const videos  = videoData?.data   || [];
+  const galleryImages = galleryData?.data || [];
 
   return (
     <div>
@@ -74,9 +84,21 @@ const Media = () => {
           </div>
         )}
 
-        {activeTab === 'Videos'  && <VideoGrid videos={videos} categories={videoCategories} />}
-        {activeTab === 'Audio'   && <AudioPlayer tracks={tracks} />}
-        {activeTab === 'Gallery' && <ImageGallery images={galleryImages} tags={galleryTags} />}
+        {activeTab === 'Videos'  && (
+          videoLoading
+            ? <p className="text-center py-12 text-gray-400">Loading...</p>
+            : <VideoGrid videos={videos} />
+        )}
+        {activeTab === 'Audio'   && (
+          audioLoading
+            ? <p className="text-center py-12 text-gray-400">Loading...</p>
+            : tracks.length > 0 ? <AudioPlayer tracks={tracks} /> : <p className="text-center py-12 text-gray-400">No audio available.</p>
+        )}
+        {activeTab === 'Gallery' && (
+          galleryLoading
+            ? <p className="text-center py-12 text-gray-400">Loading...</p>
+            : <ImageGallery images={galleryImages} />
+        )}
 
       </div>
     </div>

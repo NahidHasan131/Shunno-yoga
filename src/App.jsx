@@ -25,6 +25,7 @@ import GalleryManager from './pages/admin/GalleryManager'
 import TrainerManager from './pages/admin/TrainerManager'
 import EventManager from './pages/admin/EventManager'
 import Profile from './pages/admin/Profile'
+import Users from './pages/admin/Users'
 
 function App() {
   const router = createBrowserRouter([
@@ -77,6 +78,7 @@ function App() {
             { path: 'trainers',         element: <TrainerManager /> },
             { path: 'events',           element: <EventManager /> },
             { path: 'profile',          element: <Profile /> },
+            { path: 'users',            element: <Users /> },
           ]
         }
       ]

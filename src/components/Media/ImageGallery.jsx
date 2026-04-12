@@ -1,16 +1,26 @@
 import React, { useState } from 'react';
 import { IoClose } from 'react-icons/io5';
-import { MdLocationOn, MdCalendarToday, MdLabel, MdArrowBackIos, MdArrowForwardIos } from 'react-icons/md';
+import { MdLocationOn, MdCalendarToday, MdArrowBackIos, MdArrowForwardIos } from 'react-icons/md';
 import Pagination from './Pagination';
 
 const PER_PAGE = 12;
 
-const ImageGallery = ({ images, tags }) => {
+const normalize = (img) => ({
+  id:       img.id || img._id,
+  src:      img.src || img.imageUrl,
+  title:    img.title,
+  location: img.location || null,
+  date:     img.date || (img.createdAt ? new Date(img.createdAt).toLocaleDateString('en-US', { day: 'numeric', month: 'short', year: 'numeric' }) : null),
+  tag:      img.tag || null,
+});
+
+const ImageGallery = ({ images: rawImages = [], tags }) => {
   const [activeTag, setActiveTag] = useState('All');
   const [page, setPage] = useState(1);
   const [lightbox, setLightbox] = useState(null);
 
-  const filtered = activeTag === 'All' ? images : images.filter(img => img.tag === activeTag);
+  const images = rawImages.map(normalize);
+  const filtered = (!tags || activeTag === 'All') ? images : images.filter(img => img.tag === activeTag);
   const totalPages = Math.ceil(filtered.length / PER_PAGE);
   const paged = filtered.slice((page - 1) * PER_PAGE, page * PER_PAGE);
 
@@ -34,7 +44,8 @@ const ImageGallery = ({ images, tags }) => {
 
   return (
     <div>
-      {/* Tag filter */}
+      {/* Tag filter — only show if tags provided */}
+      {tags && tags.length > 0 && (
       <div className="flex flex-wrap gap-2 mb-10">
         {tags.map(tag => (
           <button key={tag} onClick={() => handleTagChange(tag)}
@@ -48,6 +59,7 @@ const ImageGallery = ({ images, tags }) => {
           </button>
         ))}
       </div>
+      )}
 
       {/* Masonry grid */}
       <div className="columns-1 sm:columns-2 lg:columns-3 gap-4 space-y-4">
@@ -91,7 +103,6 @@ const ImageGallery = ({ images, tags }) => {
               <div className="flex flex-col gap-3 text-sm text-gray-300">
                 <div className="flex items-center gap-2"><MdLocationOn size={16} className="text-[#62826B] shrink-0" />{activeImg.location}</div>
                 <div className="flex items-center gap-2"><MdCalendarToday size={16} className="text-[#62826B] shrink-0" />{activeImg.date}</div>
-                <div className="flex items-center gap-2"><MdLabel size={16} className="text-[#62826B] shrink-0" />{activeImg.tag}</div>
               </div>
               <p className="text-xs text-gray-400 mt-2">{lightbox + 1} / {filtered.length}</p>
             </div>
