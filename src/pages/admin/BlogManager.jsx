@@ -5,6 +5,7 @@ import * as yup from 'yup';
 import { toast } from 'sonner';
 import { MdAdd, MdEdit, MdDelete, MdArticle, MdSearch, MdImage } from 'react-icons/md';
 import { useGetBlogsQuery, useCreateBlogMutation, useUpdateBlogMutation, useDeleteBlogMutation } from '../../store/blogsApi';
+import { useSelector } from 'react-redux';
 import { useSearchParams } from 'react-router-dom';
 import AdminModal from '../../components/admin/AdminModal';
 import AdminFormField from '../../components/admin/AdminFormField';
@@ -29,10 +30,13 @@ const BlogManager = () => {
   const [createBlog, { isLoading: creating }] = useCreateBlogMutation();
   const [updateBlog, { isLoading: updating }] = useUpdateBlogMutation();
   const [deleteBlog] = useDeleteBlogMutation();
+  const currentUser = useSelector(state => state.auth.user);
+  const isAdmin = currentUser?.role === 'admin';
 
-  const blogs = data?.data?.blogs || [];
+  const allBlogs = data?.data?.blogs || [];
+  const blogs = allBlogs;
   const totalPages = data?.pagination?.pages || 1;
-  const total = data?.pagination?.total || 0;
+  const total = isAdmin ? (data?.pagination?.total || 0) : blogs.length;
   const filtered = blogs.filter(p =>
     p.title.toLowerCase().includes(search.toLowerCase())
   );
@@ -95,10 +99,12 @@ const BlogManager = () => {
           </div>
           <p className="text-sm text-gray-400 mt-1">{total} posts total</p>
         </div>
-        <button onClick={openCreate}
-          className="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-[#62826B] text-white text-sm font-medium hover:bg-[#11141B] transition-colors">
-          <MdAdd size={18} /> New Post
-        </button>
+        {isAdmin && (
+          <button onClick={openCreate}
+            className="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-[#62826B] text-white text-sm font-medium hover:bg-[#11141B] transition-colors">
+            <MdAdd size={18} /> New Post
+          </button>
+        )}
       </div>
 
       {/* Search */}
@@ -128,14 +134,18 @@ const BlogManager = () => {
               <p className="text-xs text-gray-500 mt-1">By {post.writer?.name || '—'} · {new Date(post.createdAt).toLocaleDateString()}</p>
             </div>
             <div className="flex items-center gap-1 shrink-0">
-              <button onClick={() => openEdit(post)}
-                className="p-2 rounded-lg text-gray-400 hover:text-[#62826B] hover:bg-[#62826B]/10 transition-colors">
-                <MdEdit size={18} />
-              </button>
-              <button onClick={() => setDeleteId(post._id)}
-                className="p-2 rounded-lg text-gray-400 hover:text-red-500 hover:bg-red-50 transition-colors">
-                <MdDelete size={18} />
-              </button>
+              {isAdmin && (
+                <>
+                  <button onClick={() => openEdit(post)}
+                    className="p-2 rounded-lg text-gray-400 hover:text-[#62826B] hover:bg-[#62826B]/10 transition-colors">
+                    <MdEdit size={18} />
+                  </button>
+                  <button onClick={() => setDeleteId(post._id)}
+                    className="p-2 rounded-lg text-gray-400 hover:text-red-500 hover:bg-red-50 transition-colors">
+                    <MdDelete size={18} />
+                  </button>
+                </>
+              )}
             </div>
           </div>
         ))}
@@ -144,8 +154,8 @@ const BlogManager = () => {
       {/* Pagination */}
       <Pagination page={page} totalPages={totalPages} total={total} label="posts" limit={10} onPageChange={setPage} />
 
-      {/* Create / Edit modal */}
-      {showForm && (
+      {/* Create / Edit modal — admin only */}
+      {isAdmin && showForm && (
         <AdminModal title={editingPost ? 'Edit Post' : 'New Blog Post'} onClose={() => setShowForm(false)}>
           <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4">
 
@@ -178,7 +188,7 @@ const BlogManager = () => {
       )}
 
       {/* Delete confirm */}
-      {deleteId && (
+      {isAdmin && deleteId && (
         <AdminModal title="Delete Post?" onClose={() => setDeleteId(null)}>
           <p className="text-sm text-gray-500 mb-5">This action cannot be undone.</p>
           <div className="flex items-center justify-end gap-3">

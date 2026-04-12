@@ -13,7 +13,9 @@ const Users = () => {
   const [updateRole, { isLoading: updating }] = useUpdateUserRoleMutation();
   const [deleteUser] = useDeleteUserMutation();
 
-  const users = data?.data || [];
+  const users = Array.isArray(data?.data) ? data.data : 
+                Array.isArray(data?.data?.users) ? data.data.users :
+                Array.isArray(data) ? data : [];
   const filtered = users.filter(u =>
     u.name?.toLowerCase().includes(search.toLowerCase()) ||
     u.email?.toLowerCase().includes(search.toLowerCase())

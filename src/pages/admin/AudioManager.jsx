@@ -5,6 +5,7 @@ import * as yup from 'yup';
 import { toast } from 'sonner';
 import { MdAdd, MdEdit, MdDelete, MdAudiotrack, MdSearch, MdMusicNote, MdLink } from 'react-icons/md';
 import { useGetAudiosQuery, useCreateAudioMutation, useUpdateAudioMutation, useDeleteAudioMutation } from '../../store/audioApi';
+import { useSelector } from 'react-redux';
 import AdminModal from '../../components/admin/AdminModal';
 import AdminFormField from '../../components/admin/AdminFormField';
 import ImageInput from '../../components/admin/ImageInput';
@@ -32,8 +33,11 @@ const AudioManager = () => {
   const [createAudio, { isLoading: creating }] = useCreateAudioMutation();
   const [updateAudio, { isLoading: updating }] = useUpdateAudioMutation();
   const [deleteAudio] = useDeleteAudioMutation();
+  const currentUser = useSelector(state => state.auth.user);
+  const isAdmin = currentUser?.role === 'admin';
 
-  const audios = data?.data || [];
+  const allAudios = data?.data || [];
+  const audios = allAudios;
   const filtered = audios.filter(a =>
     a.title.toLowerCase().includes(search.toLowerCase())
   );
@@ -98,10 +102,12 @@ const AudioManager = () => {
           </div>
           <p className="text-sm text-gray-400 mt-1">{filtered.length} tracks total</p>
         </div>
-        <button onClick={openCreate}
-          className="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-[#62826B] text-white text-sm font-medium hover:bg-[#11141B] transition-colors">
-          <MdAdd size={18} /> Add Audio
-        </button>
+        {isAdmin && (
+          <button onClick={openCreate}
+            className="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-[#62826B] text-white text-sm font-medium hover:bg-[#11141B] transition-colors">
+            <MdAdd size={18} /> Add Audio
+          </button>
+        )}
       </div>
 
       {/* Search */}
@@ -143,14 +149,18 @@ const AudioManager = () => {
 
             {/* Actions */}
             <div className="flex items-center gap-1 shrink-0">
-              <button onClick={() => openEdit(item)}
-                className="p-2 rounded-lg text-gray-400 hover:text-[#62826B] hover:bg-[#62826B]/10 transition-colors">
-                <MdEdit size={18} />
-              </button>
-              <button onClick={() => setDeleteId(item._id)}
-                className="p-2 rounded-lg text-gray-400 hover:text-red-500 hover:bg-red-50 transition-colors">
-                <MdDelete size={18} />
-              </button>
+              {isAdmin && (
+                <>
+                  <button onClick={() => openEdit(item)}
+                    className="p-2 rounded-lg text-gray-400 hover:text-[#62826B] hover:bg-[#62826B]/10 transition-colors">
+                    <MdEdit size={18} />
+                  </button>
+                  <button onClick={() => setDeleteId(item._id)}
+                    className="p-2 rounded-lg text-gray-400 hover:text-red-500 hover:bg-red-50 transition-colors">
+                    <MdDelete size={18} />
+                  </button>
+                </>
+              )}
             </div>
           </div>
         ))}
@@ -159,7 +169,7 @@ const AudioManager = () => {
       <Pagination page={page} totalPages={totalPages} total={filtered.length} label="tracks" limit={PER_PAGE} onPageChange={setPage} />
 
       {/* Create / Edit modal */}
-      {showForm && (
+      {isAdmin && showForm && (
         <AdminModal title={editingItem ? 'Edit Audio' : 'Add Audio'} onClose={() => setShowForm(false)}>
           <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4">
 

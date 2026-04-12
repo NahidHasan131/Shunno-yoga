@@ -5,6 +5,7 @@ import * as yup from 'yup';
 import { toast } from 'sonner';
 import { MdAdd, MdEdit, MdDelete, MdPhotoLibrary, MdSearch, MdImage } from 'react-icons/md';
 import { useGetGalleryQuery, useCreateGalleryMutation, useUpdateGalleryMutation, useDeleteGalleryMutation } from '../../store/galleryApi';
+import { useSelector } from 'react-redux';
 import AdminModal from '../../components/admin/AdminModal';
 import AdminFormField from '../../components/admin/AdminFormField';
 import ImageInput from '../../components/admin/ImageInput';
@@ -31,8 +32,11 @@ const GalleryManager = () => {
   const [createGallery, { isLoading: creating }] = useCreateGalleryMutation();
   const [updateGallery, { isLoading: updating }] = useUpdateGalleryMutation();
   const [deleteGallery] = useDeleteGalleryMutation();
+  const currentUser = useSelector(state => state.auth.user);
+  const isAdmin = currentUser?.role === 'admin';
 
-  const items = data?.data || [];
+  const allItems = data?.data || [];
+  const items = allItems;
   const filtered = items.filter(i =>
     i.title.toLowerCase().includes(search.toLowerCase())
   );
@@ -97,10 +101,12 @@ const GalleryManager = () => {
           </div>
           <p className="text-sm text-gray-400 mt-1">{filtered.length} images total</p>
         </div>
-        <button onClick={openCreate}
-          className="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-[#62826B] text-white text-sm font-medium hover:bg-[#11141B] transition-colors">
-          <MdAdd size={18} /> Add Image
-        </button>
+        {isAdmin && (
+          <button onClick={openCreate}
+            className="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-[#62826B] text-white text-sm font-medium hover:bg-[#11141B] transition-colors">
+            <MdAdd size={18} /> Add Image
+          </button>
+        )}
       </div>
 
       {/* Search */}
@@ -130,14 +136,18 @@ const GalleryManager = () => {
                 {item.location && <p className="text-gray-300 text-xs mt-0.5">📍 {item.location}</p>}
               </div>
               <div className="flex items-center justify-end gap-1">
-                <button onClick={() => openEdit(item)}
-                  className="p-1.5 rounded-lg bg-white/20 text-white hover:bg-white/40 transition-colors">
-                  <MdEdit size={15} />
-                </button>
-                <button onClick={() => setDeleteId(item._id)}
-                  className="p-1.5 rounded-lg bg-red-500/70 text-white hover:bg-red-500 transition-colors">
-                  <MdDelete size={15} />
-                </button>
+                {isAdmin && (
+                  <>
+                    <button onClick={() => openEdit(item)}
+                      className="p-1.5 rounded-lg bg-white/20 text-white hover:bg-white/40 transition-colors">
+                      <MdEdit size={15} />
+                    </button>
+                    <button onClick={() => setDeleteId(item._id)}
+                      className="p-1.5 rounded-lg bg-red-500/70 text-white hover:bg-red-500 transition-colors">
+                      <MdDelete size={15} />
+                    </button>
+                  </>
+                )}
               </div>
             </div>
           </div>

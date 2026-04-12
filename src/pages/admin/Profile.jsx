@@ -6,10 +6,17 @@ import { useGetBlogsQuery } from '../../store/blogsApi';
 
 const Profile = () => {
   const user = useSelector(state => state.auth.user);
-  const { data } = useGetBlogsQuery({ page: 1, limit: 1 });
+  const { data } = useGetBlogsQuery({ page: 1, limit: 100 });
 
-  const totalPosts = data?.pagination?.total || 0;
-  const lastPost = data?.data?.blogs?.[0];
+  const allBlogs = data?.data?.blogs || [];
+  // filter by current user's posts
+  const myBlogs = allBlogs.filter(b =>
+    b.writer?._id === user?._id || b.writer === user?._id
+  );
+  const totalPosts = myBlogs.length;
+  const lastPost = myBlogs.length > 0
+    ? myBlogs.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))[0]
+    : null;
   const lastPostDate = lastPost
     ? new Date(lastPost.createdAt).toLocaleDateString('en-US', { day: 'numeric', month: 'short', year: 'numeric' })
     : '—';

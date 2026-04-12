@@ -11,7 +11,7 @@ export const usersApi = createApi({
       providesTags: ['User'],
     }),
     updateUserRole: builder.mutation({
-      query: ({ id, role }) => ({ url: `/users/${id}/role`, method: 'PUT', body: { role } }),
+      query: ({ id, role }) => ({ url: `/users/${id}/role`, method: 'PATCH', body: { role } }),
       invalidatesTags: ['User'],
     }),
     deleteUser: builder.mutation({
