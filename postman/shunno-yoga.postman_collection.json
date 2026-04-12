@@ -1,0 +1,463 @@
+{
+  "info": {
+    "_postman_id": "34d61abd-7e29-40e7-8901-931c34d61571",
+    "name": "shunno-yoga",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "33308234",
+    "_collection_link": "https://go.postman.co/collection/33308234-34d61abd-7e29-40e7-8901-931c34d61571?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "auth",
+      "item": [
+        {
+          "name": "register",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"name\": \"Nahid Hasan\",\n    \"email\": \"nahid@gmail.com\",\n    \"mobile\":\"01744980560\",\n    \"password\": \"44980560\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{BASE_URL}}/auth/register",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "auth",
+                "register"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "login",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"email\": \"nahid123@gmail.com\",\r\n    \"password\": \"nahid123\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{BASE_URL}}/auth/login",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "auth",
+                "login"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "blog",
+      "item": [
+        {
+          "name": "Create Blog",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"title\": \"The Role of Nutrition in Yoga and Meditation\",\r\n    \"image\": \"https://omispace.com/shanty/wp-content/uploads/sites/4/2024/06/shot-of-a-diverse-group-of-women-sitting-together-2023-11-27-05-08-38-utc-1.jpg\",\r\n    \"content\": \"Diam pharetra nulla nullam eget blandit habitasse turpis. Vestibulum odio pulvinar turpis faucibus fermentum nec nunc.\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{BASE_URL}}/blogs",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "blogs"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Blog",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{BASE_URL}}/blogs",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "blogs"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update Blog",
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"title\": \"The Role of Nutrition in Yoga\",\r\n    \"image\": \"https://omispace.com/shanty/wp-content/uploads/sites/4/2024/06/shot-of-a-diverse-group-of-women-sitting-together-2023-11-27-05-08-38-utc-1.jpg\",\r\n    \"content\": \"Diam pharetra nulla nullam eget blandit habitasse turpis. Vestibulum odio pulvinar turpis faucibus fermentum nec nunc.\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{BASE_URL}}/blogs/69d62153d4730c7a7343364a",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "blogs",
+                "69d62153d4730c7a7343364a"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete Blog",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{BASE_URL}}/blogs/69d4d96cf5be67d0edac1505",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "blogs",
+                "69d4d96cf5be67d0edac1505"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "audio",
+      "item": [
+        {
+          "name": "Get Audio",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"email\": \"nahid123@gmail.com\",\r\n    \"password\": \"nahid123\"\r\n}"
+            },
+            "url": {
+              "raw": "{{BASE_URL}}/audio",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "audio"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Create  Audio",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"title\": \"Magical Meditation Track\",\r\n    \"description\": \"This is a calm and peaceful meditation audio6\",\r\n    \"audioUrl\": \"https://ik.imagekit.io/demo/audio.mp3\",\r\n    \"thumbnail\": \"https://ik.imagekit.io/demo/thumb.jpg\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{BASE_URL}}/audio",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "audio"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "update audio",
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"title\": \"Meditation Track\",\r\n    \"description\": \"This is a maditation track\",\r\n    \"audioUrl\": \"https://ik.imagekit.io/demo/audio.mp3\",\r\n    \"thumbnail\": \"https://ik.imagekit.io/demo/thumb.jpg\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{BASE_URL}}/audio/69da14c0d441a1647c729324",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "audio",
+                "69da14c0d441a1647c729324"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "video",
+      "item": [
+        {
+          "name": "Get Video",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"email\": \"nahid123@gmail.com\",\r\n    \"password\": \"nahid123\"\r\n}"
+            },
+            "url": {
+              "raw": "{{BASE_URL}}/video",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "video"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Create  Video",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"title\": \"Full Body Yoga for Flexibility\",\r\n    \"description\": \"Improve your flexibility and release tension with this full body yoga session.\",\r\n    \"videoUrl\": \"https://youtu.be/v7AYKMP6rOE?si=T8v3nDROa6jmmgJd\",\r\n    \"thumbnail\": \"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTrFbGWJXnAB9c5m3NqNEdkElOnE9G1Q0N5fQ&s\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{BASE_URL}}/video",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "video"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "update Video",
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"title\": \"Full Body Yoga for Flexibility\",\r\n    \"description\": \"Improve your flexibility \",\r\n    \"videoUrl\": \"https://youtu.be/v7AYKMP6rOE?si=T8v3nDROa6jmmgJd\",\r\n    \"thumbnail\": \"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTrFbGWJXnAB9c5m3NqNEdkElOnE9G1Q0N5fQ&s\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{BASE_URL}}/video/69da267fd441a1647c72938e",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "video",
+                "69da267fd441a1647c72938e"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "gallery",
+      "item": [
+        {
+          "name": "Get Gallery Image",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "text"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{BASE_URL}}/gallery",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "gallery"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Create  Video",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"title\": \"Full Body Yoga for Flexibility\",\r\n    \"description\": \"Improve your flexibility and release tension with this full body yoga session.\",\r\n    \"videoUrl\": \"https://youtu.be/v7AYKMP6rOE?si=T8v3nDROa6jmmgJd\",\r\n    \"thumbnail\": \"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTrFbGWJXnAB9c5m3NqNEdkElOnE9G1Q0N5fQ&s\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{BASE_URL}}/video",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "video"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "update Video",
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"title\": \"Full Body Yoga for Flexibility\",\r\n    \"description\": \"Improve your flexibility \",\r\n    \"videoUrl\": \"https://youtu.be/v7AYKMP6rOE?si=T8v3nDROa6jmmgJd\",\r\n    \"thumbnail\": \"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTrFbGWJXnAB9c5m3NqNEdkElOnE9G1Q0N5fQ&s\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{BASE_URL}}/video/69da267fd441a1647c72938e",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "video",
+                "69da267fd441a1647c72938e"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{token}}",
+        "type": "string"
+      }
+    ]
+  },
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "requests": {},
+        "exec": [
+          ""
+        ]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "requests": {},
+        "exec": [
+          ""
+        ]
+      }
+    }
+  ],
+  "variable": [
+    {
+      "key": "token",
+      "value": ""
+    }
+  ]
+}
